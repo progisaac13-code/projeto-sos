@@ -14,6 +14,14 @@ if (count($res) > 0) {
     $pass = $res[0]['senha'];
     if (password_verify($password, $pass)) {
         // Password is correct
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION['user_id'] = $res[0]['id_usuario'];
+        $_SESSION['user_name'] = $res[0]['nome'];
+
         echo 'success';
     } else {
         // Password is incorrect
