@@ -5,6 +5,11 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../index.php');
     exit();
 }
+
+$pag = '';
+if (isset($_GET['pag'])) {
+    $pag = $_GET['pag'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,29 +33,37 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <img src="../images/logo.png" width="50" class="img-fluid mb-2" alt="Logo">
-                <h2 class="hibur-mono-regular">Sistema SOS</h2>
-            </a>
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-            </ul>
-        </header>
-        <div class="b-example-divider"></div>
-            <div class="details">
-                <p>Nome do usuário: <?php echo $_SESSION['user_name']; ?> - Código de Entrada: <?php echo $_SESSION['user_id']; ?></p>
+    <header>
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <img src="../images/logo.png" width="70" class="img-fluid mb-2" alt="Logo">
+                </a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Clientes</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Equipamentos</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Log Out</a></li>
+                </ul>
+            </div>
+            <div class="b-example-divider"></div>
+                <div class="details text-white">
+                    <p>Nome do usuário: <?php echo $_SESSION['user_name']; ?> - Código de Entrada: <?php echo $_SESSION['user_id']; ?></p>
+                </div>
             </div>
         </div>
+    </header>
+    <div class="pag">
+        <?php
+            if ($pag === 'home') {
+                include 'home.php';
+            } elseif ($pag === 'profile') {
+                include 'profile.php';
+            } else {
+                include 'home.php';
+            }
+        ?>
     </div>
-    <?php 
-    
-    ?>
 </body>
 
 </html>

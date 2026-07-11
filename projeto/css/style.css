@@ -5,6 +5,11 @@
     margin: 0;
 }
 
+header {
+    background-color: #312584;
+    padding: 20px;
+}
+
 .hibur-mono-regular {
   font-family: "Hibur Mono", monospace;
   font-weight: 400;
@@ -16,4 +21,35 @@
   font-family: "Hibur Mono", monospace;
   font-weight: 400;
   font-style: normal;
+}
+
+.pag {
+    margin: 30px 20px;
+}
+
+.details-user  {
+    padding: 20px;
+}
+
+.details-user .img-user {
+    background: linear-gradient(rgba(0, 0, 0, 0.233), rgba(0, 0, 0, 0)), url('../image/usuario-img.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 200px 0;
+}
+
+.details-user .info-user {
+    padding: 20px;
+}   
+
+.details-user .info-user h3 {
+    font-family: "Hibur Mono", monospace;
+    font-size: 20px;
+    color: #000;
+}
+
+.details-user .info-user h2 {
+    font-size: 40px;
+    color: #000;
 }

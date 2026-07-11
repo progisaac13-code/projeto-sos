@@ -71,7 +71,7 @@ require_once 'database/conexao.php';
             },
             success: function(response) {
                 if (response === 'success') {
-                    window.location.href = 'projeto/';
+                    window.location.href = 'projeto/index.php?pag=home';
                 } else {
                     alert(response);
                 }
