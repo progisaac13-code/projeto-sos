@@ -1,0 +1,37 @@
+.hibur-mono-regular {
+  font-family: "Hibur Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to right, #312584, #E96A12);
+}
+
+div.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login form {
+    background-color: #ffffff42;
+    padding: 40px;
+}
+
+.login form .btn-form {
+    background: rgba(0, 0, 0, 0.623);
+    padding: 15px 20px;
+    color: #fff;
+}
+
+.login h1 {
+    font-size: 32px;
+    margin: 0 0 20px 0;
+}
