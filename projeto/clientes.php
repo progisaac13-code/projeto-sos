@@ -81,18 +81,23 @@ require_once('../database/conexao.php');
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" enctype="multipart/form-data">
+                <form id="formUpload">
                     <div class="row">
                         <div class="col text-center">
-                            <input type="file" name="target" id="target" class="form-control" onchange="carregarImg()">
+                            <input type="file" name="img" id="img" class="form-control">
                             <img src="image/icon-user.jpg" width="350" alt="" id="preview" class="img-fluid mt-2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" id="fotoClienteId" name="fotoClienteId">
+                            <button type="submit" class="btn btn-primary">Salvar Imagem</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar Imagem</button>
             </div>
         </div>
     </div>
@@ -104,9 +109,10 @@ require_once('../database/conexao.php');
 </button>
 
 <script>
-    function carregarImg() {
+    $('#formUpload').on('submit', function(e) {
+
         var target = document.getElementById('preview');
-        var file = document.querySelector('target').files[0];
+        var file = document.querySelector('#img').files[0];
         var reader = new FileReader();
 
         reader.onloadend = function() {
@@ -119,7 +125,37 @@ require_once('../database/conexao.php');
             target.src = "";
         }
 
-    }
+        e.preventDefault(); // impede o recarregamento da página
+
+        var arquivo = $('#img')[0].files[0];
+
+        if (!arquivo) {
+            alert('Selecione uma imagem primeiro.');
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append('imagem', arquivo);
+
+        $.ajax({
+            url: 'clientes/subir_image.php',
+            method: 'POST',
+            data: formData,
+            contentType: false, // obrigatório: deixa o navegador definir o multipart/form-data
+            processData: false, // obrigatório: impede o jQuery de converter o FormData em string
+            success: function(data) {
+                if (data.trim() === 'Imagem enviada com sucesso.') {
+                    alert('Upload realizado com sucesso!');
+                    buscarListaUsuarios(); // atualiza a lista, se necessário
+                } else {
+                    alert('Erro ao enviar imagem: ' + data);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao enviar imagem:', error);
+            }
+        });
+    });
 
     $(document).ready(function() {
         // Chama a função para buscar a lista de usuários ao carregar a página
