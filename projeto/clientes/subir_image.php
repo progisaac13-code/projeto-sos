@@ -1,11 +1,10 @@
 <?php 
 require_once("../../database/conexao.php");
 
-$id_cliente = $_FILES['fotoClienteId'] ?? null;
-
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["imagem"])) {
-
+    
     $arquivo = $_FILES["imagem"];
+    $id_cliente = $_FILES['fotoClienteId'];
 
     // Verifica se houve erro no upload
     if ($arquivo["error"] !== UPLOAD_ERR_OK) {

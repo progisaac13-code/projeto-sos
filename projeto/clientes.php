@@ -73,100 +73,72 @@ require_once('../database/conexao.php');
     </div>
 </div>
 
-<div class="modal fade" id="foto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formUpload">
-                    <div class="row">
-                        <div class="col text-center">
-                            <input type="file" name="img" id="img" class="form-control">
-                            <img src="image/icon-user.jpg" width="350" alt="" id="preview" class="img-fluid mt-2">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="hidden" id="fotoClienteId" name="fotoClienteId">
-                            <button type="submit" class="btn btn-primary">Salvar Imagem</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <button type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#modalEditar" id="open_modal">
     Launch demo modal
 </button>
 
 <script>
-    $('#formUpload').on('submit', function(e) {
+    // $('#formUpload').on('submit', function(e) {
 
-        var target = document.getElementById('preview');
-        var file = document.querySelector('#img').files[0];
-        var reader = new FileReader();
+    //     var target = document.getElementById('preview');
+    //     var file = document.querySelector('#img').files[0];
+    //     var reader = new FileReader();
 
-        reader.onloadend = function() {
-            target.src = reader.result;
-        };
+    //     reader.onloadend = function() {
+    //         target.src = reader.result;
+    //     };
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            target.src = "";
-        }
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     } else {
+    //         target.src = "";
+    //     }
 
-        e.preventDefault(); // impede o recarregamento da página
+    //     e.preventDefault(); // impede o recarregamento da página
 
-        var arquivo = $('#img')[0].files[0];
+    //     var arquivo = $('#img')[0].files[0];
 
-        if (!arquivo) {
-            alert('Selecione uma imagem primeiro.');
-            return;
-        }
+    //     if (!arquivo) {
+    //         alert('Selecione uma imagem primeiro.');
+    //         return;
+    //     }
 
-        var formData = new FormData();
-        formData.append('imagem', arquivo);
+    //     var formData = new FormData();
+    //     formData.append('imagem', arquivo);
 
-        $.ajax({
-            url: 'clientes/subir_image.php',
-            method: 'POST',
-            data: formData,
-            contentType: false, // obrigatório: deixa o navegador definir o multipart/form-data
-            processData: false, // obrigatório: impede o jQuery de converter o FormData em string
-            success: function(data) {
-                if (data.trim() === 'Imagem enviada com sucesso.') {
-                    alert('Upload realizado com sucesso!');
-                    buscarListaUsuarios(); // atualiza a lista, se necessário
-                } else {
-                    alert('Erro ao enviar imagem: ' + data);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro ao enviar imagem:', error);
-            }
-        });
-    });
+    //     $.ajax({
+    //         url: 'clientes/subir_image.php',
+    //         method: 'POST',
+    //         data: formData,
+    //         contentType: false, // obrigatório: deixa o navegador definir o multipart/form-data
+    //         processData: false, // obrigatório: impede o jQuery de converter o FormData em string
+    //         success: function(data) {
+    //             if (data.trim() === 'Imagem enviada com sucesso.') {
+    //                 alert('Upload realizado com sucesso!');
+    //                 buscarListaUsuarios(); // atualiza a lista, se necessário
+    //             } else {
+    //                 alert('Erro ao enviar imagem: ' + data);
+    //             }
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error('Erro ao enviar imagem:', error);
+    //         }
+    //     });
+    // });
 
     $(document).ready(function() {
         // Chama a função para buscar a lista de usuários ao carregar a página
-        buscarListaUsuarios();
+        buscarListaUsuarios('list');
     });
 
     // Função para buscar a lista de usuários
-    function buscarListaUsuarios() {
+    function buscarListaUsuarios(view) {
         $.ajax({
             url: 'clientes/lista_usuarios.php', // Arquivo PHP que retorna a lista de usuários
             method: 'POST',
+            data: {
+                view: view // Envia o parâmetro 'view' para o PHP
+            },
             success: function(data) {
                 // Atualiza o conteúdo da div com a lista de usuários
                 $('.lista-usuarios').html(data);
@@ -188,7 +160,7 @@ require_once('../database/conexao.php');
                 success: function(data) {
                     // Atualiza a lista de usuários após a exclusão
                     if (data.trim() === 'Cliente excluído com sucesso.') {
-                        buscarListaUsuarios();
+                        buscarListaUsuarios('list');
                     } else {
                         alert('Erro ao excluir cliente: ' + data);
                     }
@@ -239,7 +211,7 @@ require_once('../database/conexao.php');
             },
             success: function(data) {
                 if (data.trim() === 'Cliente atualizado com sucesso.') {
-                    buscarListaUsuarios();
+                    buscarListaUsuarios('list');
                     $("#close").click();
                 } else {
                     alert('Erro ao atualizar cliente: ' + data);
@@ -266,7 +238,7 @@ require_once('../database/conexao.php');
             },
             success: function(data) {
                 if (data.trim() === 'Cliente adicionado com sucesso.') {
-                    buscarListaUsuarios();
+                    buscarListaUsuarios('list');
                     $('#adicionarCliente').modal('hide');
                     // Limpar os campos do formulário
                     $('#nome').val('');
