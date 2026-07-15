@@ -48,7 +48,7 @@ if (count($res) > 0) {
                         <a href="https://wa.me/<?php echo str_replace([' ', '-'], ['', ''], $telefone); ?>" target="_blank" class="px-2">
                             <i class="fa-brands fa-whatsapp" title="WhatsApp"></i>
                         </a>
-                        <a href="#">
+                        <a href="#" onclick="$('#foto').modal('show')" class="px-2">
                             <i class="fa-solid fa-file-image" title="Adicionar/Alterar Imagem"></i>
                         </a>
                     </div>

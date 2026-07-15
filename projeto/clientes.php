@@ -73,12 +73,54 @@ require_once('../database/conexao.php');
     </div>
 </div>
 
+<div class="modal fade" id="foto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col text-center">
+                            <input type="file" name="target" id="target" class="form-control" onchange="carregarImg()">
+                            <img src="image/icon-user.jpg" width="350" alt="" id="preview" class="img-fluid mt-2">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary">Salvar Imagem</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <button type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#modalEditar" id="open_modal">
     Launch demo modal
 </button>
 
 <script>
+    function carregarImg() {
+        var target = document.getElementById('preview');
+        var file = document.querySelector('target').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            target.src = "";
+        }
+
+    }
+
     $(document).ready(function() {
         // Chama a função para buscar a lista de usuários ao carregar a página
         buscarListaUsuarios();
