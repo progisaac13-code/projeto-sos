@@ -77,6 +77,8 @@ require_once('../database/conexao.php');
     Launch demo modal
 </button>
 
+
+
 <script>
     // $('#formUpload').on('submit', function(e) {
 
@@ -252,5 +254,9 @@ require_once('../database/conexao.php');
                 console.error('Erro ao adicionar cliente:', error);
             }
         });
+    });
+
+    $(document).ready(function() {
+        $('#minhaTabela').DataTable();
     });
 </script>

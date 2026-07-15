@@ -10,7 +10,11 @@ a {
     font-size: 20px;
     margin-top: 10px;
     text-decoration: none;
-    
+}
+
+a.list-icons {
+    color: black;
+    font-size: 17px;
 }
 
 .card p {
