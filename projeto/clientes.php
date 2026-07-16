@@ -1,10 +1,51 @@
 <?php
 require_once('../database/conexao.php');
 @session_start();
+if (isset($_GET['locate'])) {
+    $locate = $_GET['locate'];
+} 
 ?>
 
 <div class="">
     <div class="lista-usuarios"></div>
+</div>
+
+
+<div class="modal fade" id="localizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <?php 
+                $codigo_entrada = $_GET['locate'] ?? '';
+                $query = $pdo->query("SELECT * FROM clientes WHERE codigo_entrada = '$codigo_entrada'");
+                $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                if (count($res) > 0) {
+                    $endereco = $res[0]['enredeco'];
+
+                    $urlMapa = "https://maps.google.com/maps?q=" . urlencode($endereco) . "&output=embed";
+                } else {
+                    echo "<p>Cliente não encontrado.</p>";
+                }
+                ?>
+            </div>
+            <div class="modal-body">
+                <iframe width="1000"
+                        height="550"
+                        frameborder="0"
+                        style="border:0"
+                        src="<?php echo $urlMapa; ?>"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="id_cliente" name="id_cliente">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="alterarCliente()">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,6 +121,14 @@ require_once('../database/conexao.php');
 
 
 <script>
+    var pag = "<?php echo $pag; ?>";
+    var locate = "<?php echo $locate; ?>";
+    $(document).ready(function() {
+        if (locate) {
+            // Se locate não estiver vazio, chama a função para abrir o modal
+            $('#localizar').modal('show');
+        }
+    });
     // $('#formUpload').on('submit', function(e) {
 
     //     var target = document.getElementById('preview');
@@ -127,6 +176,8 @@ require_once('../database/conexao.php');
     //         }
     //     });
     // });
+
+
 
     $(document).ready(function() {
         // Chama a função para buscar a lista de usuários ao carregar a página

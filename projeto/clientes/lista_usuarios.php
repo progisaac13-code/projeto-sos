@@ -63,6 +63,9 @@ if (count($res) > 0) {
                             <a href="https://wa.me/<?php echo str_replace([' ', '-'], ['', ''], $telefone); ?>" target="_blank" class="list-icons">
                                 <i class="fa-brands fa-whatsapp" title="WhatsApp"></i>
                             </a>
+                            <a href="index.php?pag=clientes&locate=<?php echo "$random_inc$id_cliente"; ?>" class="list-icons">
+                                <i class="fa-solid fa-map" title="Visualizar Localização"></i>
+                            </a>
                     </tr>
                 <?php } ?>
             </tbody>

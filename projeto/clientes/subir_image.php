@@ -1,6 +1,5 @@
 <?php 
 require_once("../../database/conexao.php");
-
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["imagem"])) {
     
     $arquivo = $_FILES["imagem"];
