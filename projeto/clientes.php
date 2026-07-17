@@ -16,18 +16,20 @@ if (isset($_GET['locate'])) {
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Localização do Cliente</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <?php
                 $codigo_entrada = $_GET['locate'] ?? '';
                 $query = $pdo->query("SELECT * FROM clientes WHERE codigo_entrada = '$codigo_entrada'");
                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 if (count($res) > 0) {
                     $endereco = $res[0]['enredeco'];
+                    $nome = $res[0]['nome'];
+                    $telefone = $res[0]['telefone'];
 
                     $urlMapa = "https://maps.google.com/maps?q=" . urlencode($endereco) . "&output=embed";
                 }
                 ?>
+                <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo $nome . " - " . $telefone ?></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <iframe style="height: 100vh; width: 100%;"
