@@ -6,7 +6,7 @@ $telefone = $_POST['telefone'] ?? null;
 $endereco = $_POST['endereco'] ?? null;
 $codigo_entrada = uniqid(); // Gera um código de entrada único
 
-$query = $pdo->query("INSERT INTO clientes (nome, telefone, enredeco, image, equipamentos, codigo_entrada) VALUES ('$nome', '$telefone', '$endereco', 'icon-user.jpg', '0', '$codigo_entrada')");
+$query = $pdo->query("INSERT INTO clientes (codigo_entrada, nome, telefone, enredeco, equipamentos) VALUES ('$codigo_entrada', '$nome', '$telefone', '$endereco', '0')");
 if ($query) {
     echo "Cliente adicionado com sucesso.";
 } else {

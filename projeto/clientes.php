@@ -1,9 +1,10 @@
 <?php
 require_once('../database/conexao.php');
 @session_start();
+$locate = '';
 if (isset($_GET['locate'])) {
-    $locate = $_GET['locate'];
-} 
+    $locate = $_GET[''];
+}
 ?>
 
 <div class="">
@@ -17,7 +18,7 @@ if (isset($_GET['locate'])) {
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <?php 
+                <?php
                 $codigo_entrada = $_GET['locate'] ?? '';
                 $query = $pdo->query("SELECT * FROM clientes WHERE codigo_entrada = '$codigo_entrada'");
                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -32,11 +33,11 @@ if (isset($_GET['locate'])) {
             </div>
             <div class="modal-body">
                 <iframe width="1000"
-                        height="550"
-                        frameborder="0"
-                        style="border:0"
-                        src="<?php echo $urlMapa; ?>"
-                        allowfullscreen>
+                    height="550"
+                    frameborder="0"
+                    style="border:0"
+                    src="<?php echo 'oi'; ?>"
+                    allowfullscreen>
                 </iframe>
             </div>
             <div class="modal-footer">

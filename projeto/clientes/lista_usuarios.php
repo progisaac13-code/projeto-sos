@@ -36,7 +36,6 @@ if (count($res) > 0) {
                     }
                     $random_inc = $res[$i]['codigo_entrada'];
                     $id_cliente = $res[$i]['id_cliente'];
-                    $imagem = $res[$i]['image'];
                     $nome = $res[$i]['nome'];
                     $telefone = $res[$i]['telefone'];
                     $endereco = $res[$i]['enredeco'];
@@ -76,7 +75,6 @@ if (count($res) > 0) {
             foreach ($res[$i] as $key => $value) {
             }
             $id_cliente = $res[$i]['id_cliente'];
-            $imagem = $res[$i]['image'];
             $nome = $res[$i]['nome'];
             $telefone = $res[$i]['telefone'];
             $endereco = $res[$i]['enredeco'];
@@ -89,7 +87,6 @@ if (count($res) > 0) {
             <div class="d-flex flex-wrap justify-content-center mb-4">
                 <div class="col-md-3">
                     <div class="card" style="width: 450px;">
-                        <img src="image/<?php echo $imagem; ?>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $nome; ?></h5>
                             <p class="card-text">Telefone: <?php echo $telefone; ?></p>
