@@ -13,7 +13,7 @@ if (isset($_GET['locate'])) {
 
 
 <div class="modal fade" id="localizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Localização do Cliente</h1>
@@ -26,24 +26,20 @@ if (isset($_GET['locate'])) {
                     $endereco = $res[0]['enredeco'];
 
                     $urlMapa = "https://maps.google.com/maps?q=" . urlencode($endereco) . "&output=embed";
-                } else {
-                    echo "<p>Cliente não encontrado.</p>";
                 }
                 ?>
             </div>
             <div class="modal-body">
-                <iframe width="1000"
-                    height="550"
+                <iframe style="height: 100vh; width: 100%;"
                     frameborder="0"
                     style="border:0"
-                    src="<?php echo 'oi'; ?>"
+                    src="<?php echo $urlMapa; ?>"
                     allowfullscreen>
                 </iframe>
             </div>
             <div class="modal-footer">
                 <input type="hidden" id="id_cliente" name="id_cliente">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="alterarCliente()">Salvar Alterações</button>
             </div>
         </div>
     </div>
