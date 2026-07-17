@@ -3,7 +3,7 @@ require_once('../database/conexao.php');
 @session_start();
 $locate = '';
 if (isset($_GET['locate'])) {
-    $locate = $_GET[''];
+    $locate = $_GET['locate'];
 }
 ?>
 
@@ -16,7 +16,7 @@ if (isset($_GET['locate'])) {
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Localização do Cliente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <?php
                 $codigo_entrada = $_GET['locate'] ?? '';
