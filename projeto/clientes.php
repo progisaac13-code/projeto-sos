@@ -26,7 +26,7 @@ if (isset($_GET['locate'])) {
                     $cep = $res[0]['cep'];
                     $telefone = $res[0]['telefone'];
 
-                    $urlMapa = "https://maps.google.com/maps?q=" . urlencode($cep) . "&output=embed";
+                    $urlMapa = "https://maps.google.com/maps?q=" . urlencode($endereco) . "&output=embed";
                 }
                 ?>
                 <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo $nome . " - " . $telefone ?></h1>

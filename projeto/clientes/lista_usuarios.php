@@ -4,11 +4,14 @@ require_once("../../database/conexao.php");
 $view = $_POST['view'] ?? 'list'; // Obtém o valor do parâmetro 'view' enviado via AJAX, padrão é 'list'
 ?>
 
-<div class="d-flex flex-wrap mb-4">
-    <div class="m-auto">
-        <button class="btn btn-primary p-3 mb-3" onclick="$('#adicionarCliente').modal('show')">+ Novo Cliente</button>
-        <i class="fa-solid fa-table" style="font-size: 24px; color: gray; cursor: pointer;" title="Tabela de Clientes" onclick="buscarListaUsuarios('table')"></i>
-        <i class="fa-solid fa-list" style="font-size: 24px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="buscarListaUsuarios('list')"></i>
+<div class="d-flex flex-wrap align-items-center">
+    <div class="col-md-3 mx-2">
+        <input type="text" name="pesquisa_cliente" id="pesquisa_cliente" class="form-control" placeholder="Pesquisar Cliente">
+    </div>
+    <div class="col-md-3">
+        <i class="fa-solid fa-table"title="Exibição em Blocos" style="font-size: 18px; color: gray; cursor: pointer;" title="Tabela de Clientes" onclick="buscarListaUsuarios('table')"></i>
+        <i class="fa-solid fa-list" title="Exibição em Tabela" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="buscarListaUsuarios('list')"></i>
+        <i class="fa-solid fa-plus" title="Adicionar Cliente" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="$('#adicionarCliente').modal('show')"></i>
     </div>
 </div>
 
