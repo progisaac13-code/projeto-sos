@@ -1,28 +1,62 @@
 <style>
     header {
         display: none;
-    } body {
+    }
+    nav {
+        background: linear-gradient(165deg, #26436Ea5, #6e94caa5);
+    }
+
+    body {
         background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), url('image/ilustracao-clientes.png');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         height: 100vh;
-    } .clientes {
+    }
+
+    .clientes {
         background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2));
         backdrop-filter: blur(3px);
         padding: 20px 20px 400px 20px;
         color: white;
-    } .clientes h2 {
+    }
+
+    .clientes h2 {
         font-size: 42px;
-        font-weight: 800;   
-    } p {
+        font-weight: 800;
+    }
+
+    p {
         font-family: 'Arial', sans-serif;
         font-size: 18px;
-    } span {
+    }
+
+    span {
         font-size: 60px;
         font-weight: bold;
     }
-</style>    
+
+    .equipamentos {
+        padding: 0px 20px 380px 20px;
+    }
+</style>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../images/logo.png" alt="Logo" width="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                <a class="nav-link" href="#">Equiamentos</a>
+                <a class="nav-link" href="index.php?pag=clientes">Clientes</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <section class="d-flex flex-wrap align-items-center">
     <div class="w-50 clientes">
         <h2 class="hibur-mono-regular">Total de Clientes</h2>
@@ -30,8 +64,11 @@
         <hr>
         <span id="clientes" class="hibur-mono-regular"></span>
     </div>
-    <div class="w-50">
-
+    <div class="w-50 equipamentos">
+        <h2 class="hibur-mono-regular">Equipamentos Cadastratos</h2>
+        <p>Visualize a quantidade de equipamentos cadastrados no sistema</p>
+        <hr>
+        <span id="equipamentos" class="hibur-mono-regular"></span>
     </div>
 </section>
 <script>
