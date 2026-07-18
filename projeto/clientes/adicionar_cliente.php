@@ -4,8 +4,9 @@ require_once("../../database/conexao.php");
 $nome = $_POST['nome'] ?? null;
 $telefone = $_POST['telefone'] ?? null;
 $endereco = $_POST['endereco'] ?? null;
+$cep = $_POST['cep'] ?? null;
 
-$query = $pdo->query("INSERT INTO clientes (nome, telefone, enredeco, equipamentos) VALUES ('$nome', '$telefone', '$endereco', '0')");
+$query = $pdo->query("INSERT INTO clientes (nome, telefone, enredeco, cep, equipamentos) VALUES ('$nome', '$telefone', '$endereco', '$cep' '0')");
 if ($query) {
     $query = $pdo->query("SELECT id_cliente FROM clientes order by id_cliente desc;");
     $res = $query->fetchAll(PDO::FETCH_ASSOC);

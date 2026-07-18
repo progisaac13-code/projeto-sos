@@ -23,9 +23,10 @@ if (isset($_GET['locate'])) {
                 if (count($res) > 0) {
                     $endereco = $res[0]['enredeco'];
                     $nome = $res[0]['nome'];
+                    $cep = $res[0]['cep'];
                     $telefone = $res[0]['telefone'];
 
-                    $urlMapa = "https://maps.google.com/maps?q=" . urlencode($endereco) . "&output=embed";
+                    $urlMapa = "https://maps.google.com/maps?q=" . urlencode($cep) . "&output=embed";
                 }
                 ?>
                 <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo $nome . " - " . $telefone ?></h1>
@@ -58,16 +59,20 @@ if (isset($_GET['locate'])) {
                 <form action="">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="nome" class="form-label">Nome</label>
+                            <label for="nome" class="form-label">Nome*</label>
                             <input type="text" class="form-control" id="nome" name="nome">
                         </div>
                         <div class="col-md-6">
-                            <label for="telefone" class="form-label">Telefone</label>
+                            <label for="telefone" class="form-label">Telefone*</label>
                             <input type="text" class="form-control" id="telefone" name="telefone">
                         </div>
                         <div class="col-md-6">
-                            <label for="endereco" class="form-label">Endereço</label>
+                            <label for="endereco" class="form-label">Endereço*</label>
                             <input type="text" class="form-control" id="endereco" name="endereco">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cep" class="form-label">CEP*</label>
+                            <input type="text" class="form-control" id="cep" name="cep">
                         </div>
                     </div>
                 </form>
@@ -101,6 +106,10 @@ if (isset($_GET['locate'])) {
                         <div class="col-md-6">
                             <label for="endereco" class="form-label">Endereço</label>
                             <input type="text" class="form-control" id="endereco_cad" name="endereco">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cep" class="form-label">CEP*</label>
+                            <input type="text" class="form-control" id="cep" name="cep">
                         </div>
                     </div>
                 </form>
@@ -232,10 +241,11 @@ if (isset($_GET['locate'])) {
                 id: id
             },
             success: function(data) {
-                var [nome, telefone, endereco] = data.split(';');
+                var [nome, telefone, endereco, cep] = data.split(';');
                 $('#nome').val(nome);
                 $('#telefone').val(telefone);
                 $('#endereco').val(endereco);
+                $('#cep').val(cep)
                 $('#id_cliente').val(id);
                 $('#open_modal').click();
 
@@ -251,6 +261,7 @@ if (isset($_GET['locate'])) {
         var nome = $('#nome').val();
         var telefone = $('#telefone').val();
         var endereco = $('#endereco').val();
+        var cep = $('#cep').val()
 
         $.ajax({
             url: 'clientes/alterar_cliente.php',
@@ -259,7 +270,8 @@ if (isset($_GET['locate'])) {
                 id: id,
                 nome: nome,
                 telefone: telefone,
-                endereco: endereco
+                endereco: endereco,
+                cep: cep
             },
             success: function(data) {
                 if (data.trim() === 'Cliente atualizado com sucesso.') {
@@ -279,6 +291,7 @@ if (isset($_GET['locate'])) {
         var nome = $('#nome_cad').val();
         var telefone = $('#telefone_cad').val();
         var endereco = $('#endereco_cad').val();
+        var cep = $('#cep').val()
 
         $.ajax({
             url: 'clientes/adicionar_cliente.php',
@@ -286,7 +299,8 @@ if (isset($_GET['locate'])) {
             data: {
                 nome: nome,
                 telefone: telefone,
-                endereco: endereco
+                endereco: endereco,
+                cep: cep
             },
             success: function(data) {
                 if (data.trim() === 'Cliente adicionado com sucesso.') {
@@ -296,6 +310,7 @@ if (isset($_GET['locate'])) {
                     $('#nome').val('');
                     $('#telefone').val('');
                     $('#endereco').val('');
+                    $('#cep').val();
                 } else {
                     alert('Erro ao adicionar cliente: ' + data);
                 }

@@ -9,6 +9,7 @@ if (count($res) > 0) {
     $nome = $res[0]['nome'];
     $telefone = $res[0]['telefone'];
     $endereco = $res[0]['enredeco'];
+    $cep = $res[0]['cep'];
 
     echo "$nome;$telefone;$endereco";
 } else {
