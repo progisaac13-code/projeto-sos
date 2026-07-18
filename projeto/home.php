@@ -4,6 +4,8 @@
     }
     nav {
         background: linear-gradient(165deg, #26436Ea5, #6e94caa5);
+    } nav a {
+        font-size: 18px !important;
     }
 
     body {
@@ -42,17 +44,23 @@
 </style>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="../images/logo.png" alt="Logo" width="40">
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                <a class="nav-link" href="#">Equiamentos</a>
-                <a class="nav-link" href="index.php?pag=clientes">Clientes</a>
+                <a class="nav-link active text-white" aria-current="page" href="index.php">
+                    <i class="fa-solid fa-house"></i>    
+                    Home
+                </a>
+                <a class="nav-link text-white" href="#">
+                    <i class="fa-solid fa-hammer"></i>
+                    Equiamentos
+                </a>
+                <a class="nav-link text-white" href="index.php?pag=clientes">
+                    <i class="fa-solid fa-people-group"></i>
+                    Clientes
+                </a>
             </div>
         </div>
     </div>
