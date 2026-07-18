@@ -49,30 +49,35 @@ $pag = $_GET["pag"];
                             <div class="form-floating">
                                 <select name="clientes" id="clientes" class="form-select">
                                     <?php
-                                        $query = $pdo->query("SELECT * FROM clientes;");
-                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        if (count($res) > 0) {
-                                            for ($i = 0; $i < count($res); $i++) {
-                                                $nome = $res[$i]["nome"];
-                                                $inc = $res[$i]["codigo_entrada"];
-                                                $id_cliente = $res[$i]["id_cliente"];
-                                            
-                                            ?>
-                                                <option value="<?= $id_cliente ?>"><?= $inc . " . " . $nome ?></option>
-                                                <?php
-                                            }
+                                    $query = $pdo->query("SELECT * FROM clientes;");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    if (count($res) > 0) {
+                                        for ($i = 0; $i < count($res); $i++) {
+                                            $nome = $res[$i]["nome"];
+                                            $inc = $res[$i]["codigo_entrada"];
+                                            $id_cliente = $res[$i]["id_cliente"];
+
+                                    ?>
+                                            <option value="<?= $id_cliente ?>"><?= $inc . " . " . $nome ?></option>
+                                    <?php
                                         }
+                                    }
                                     ?>
                                 </select>
                                 <label for="clientes">Vinculado a Quem(*)</label>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-1">
                             <div class="form-floating">
                                 <textarea name="manutencao" id="manutencao" style="height: 160px;" class="form-control" placeholder="Manutenções que vão ser executada"></textarea>
                                 <label for="manuntencao">Manutenções</label>
-                            </div>    
-                        
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <textarea name="obs" id="obs" style="height: 120px;" class="form-control" placeholder="Observações"></textarea>
+                                <label for="obs">Observaçõoes</label>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -81,7 +86,7 @@ $pag = $_GET["pag"];
                 <p>(OBS) O Código do Equipamento: <span id="cod"></span></p>
                 <div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
-                    <button type="button" class="btn btn-primary">Cadastrar Equipamento</button>
+                    <button type="button" class="btn btn-primary" onclick="concluir()">Cadastrar Equipamento</button>
                 </div>
             </div>
         </div>
@@ -90,6 +95,34 @@ $pag = $_GET["pag"];
 
 <script>
     var pag = "<?= $pag ?>"
+
+    function concluir() {
+
+        var nome = $('#nome').val();
+        var valor = $('#valor');
+        var fabricacao = $('#fabricacao');
+        var id_cliente = $('#clientes');
+        var manutencao = $('#manutencao');
+        var obs = $('#obs').val()
+
+        $(document).ready(function() {
+            $.ajax({
+                url: pag + '/concluir.php',
+                method: 'post',
+                data: {
+                    nome: nome,
+                    valor: valor,
+                    fabricacao:fabricacao,
+                    id_cliente: id_cliente,
+                    manutencao: manutencao,
+                    obs: obs
+                },
+                success: function(result) {
+                    lst();
+                }
+            })
+        })
+    }
 
     function lst() {
         $.ajax({
@@ -102,17 +135,19 @@ $pag = $_GET["pag"];
             }
         })
     }
+
     function chamarAdicionar() {
         $.ajax({
             url: pag + '/novo_codigo.php',
             method: 'post',
             data: {},
-            success: function (res) {
+            success: function(res) {
                 $('#cod').text(res)
             }
         })
         $('#adicionarEQ').modal('show')
     }
+
     function fecharEQ() {
         $.ajax({
             url: pag + '/fechar-eq.php',
