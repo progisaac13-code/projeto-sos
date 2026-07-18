@@ -17,28 +17,64 @@ $pag = $_GET["pag"];
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="adicionarEQ" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="adicionarEQ" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Equipamento</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="fecharEQ()"></button>
             </div>
             <div class="modal-body">
                 <form action="">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-floating">
-                                <input type="text" name="cod" id="cod" val="" placeholder="Código do Equipamento" class="form-control">
-                                <label for="cod">Código do Equipamento</label>
+                                <input type="text" name="nome" id="nome" placeholder="Nome do Equipamento..." class="form-control">
+                                <label for="nome">Nome do Equipamento</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" name="valor" id="valor" placeholder="Valor do Produto..." class="form-control">
+                                <label for="valor">Valor do Produto</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="date" name="fabricacao" id="fabricacao" placeholder="Data de Fabricação" class="form-control">
+                                <label for="fabricacao">Data de Fabricação</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select name="clientes" id="clientes">
+                                    <?php
+                                        $query = $pdo->query("SELECT * FROM clientes;");
+                                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                        if (count($res) > 0) {
+                                            for ($i = 0; $i < count($res); $i++) {
+                                                $nome = $res[$i]["nome"];
+                                                $inc = $res[$i]["codigo_entrada"];
+                                                $id_cliente = $res[$i]["id_cliente"];
+                                            
+                                            ?>
+                                                <option value="<?= $id_cliente ?>"><?= $inc . " . " . $nome ?></option>
+                                                <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <p>(OBS) O Código do Produto: <span id="cod"></span></p>
+                <div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
+                    <button type="button" class="btn btn-primary">Cadastrar Equipamento</button>
+                </div>
             </div>
         </div>
     </div>
@@ -64,10 +100,17 @@ $pag = $_GET["pag"];
             method: 'post',
             data: {},
             success: function (res) {
-                $('#cod').val(res)
+                $('#cod').text(res)
             }
         })
         $('#adicionarEQ').modal('show')
+    }
+    function fecharEQ() {
+        $.ajax({
+            url: pag + '/fechar-eq.php',
+            method: 'post',
+            data: {}
+        })
     }
     lst()
 </script>
