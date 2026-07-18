@@ -46,7 +46,7 @@ if (count($res) > 0) {
                         <td><?php echo $cod . " - " . $nome; ?></td>
                         <td><?php echo $telefone; ?></td>
                         <td><?php echo $endereco; ?></td>
-                        <td><?php echo $equipamentos . " Equipamentos"; ?></td>
+                        <td><a href="index.php?pag=equipamentos"><?php echo $equipamentos . " Equipamentos"; ?></a></td>
                         <td>
                             <a href="#" onclick="deletarCliente(<?php echo $id_cliente ?>)" class="list-icons">
                                 <i class="fa-solid fa-trash-can" title="Excluir Cliente"></i>

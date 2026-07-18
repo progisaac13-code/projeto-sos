@@ -40,6 +40,9 @@ if (isset($_GET['pag'])) {
     <header>
         <div class="d-flex flex-wrap justify-content-between">
             <div>
+                <img src="../images/logo.png" width="80" alt="Logo">
+            </div>
+            <div>
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +54,7 @@ if (isset($_GET['pag'])) {
                                     <i class="fa-solid fa-house"></i>
                                     Home
                                 </a>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="index.php?pag=equipamentos">
                                     <i class="fa-solid fa-hammer"></i>
                                     Equiamentos
                                 </a>
@@ -72,6 +75,8 @@ if (isset($_GET['pag'])) {
             include 'home.php';
         } elseif ($pag === 'clientes') {
             include 'clientes.php';
+        } else if ($pag === 'equipamentos') {
+            include 'equipamentos.php';
         } else {
             include 'home.php';
         }

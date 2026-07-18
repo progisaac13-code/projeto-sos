@@ -53,7 +53,7 @@
                     <i class="fa-solid fa-house"></i>    
                     Home
                 </a>
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="index.php?pag=equipamentos">
                     <i class="fa-solid fa-hammer"></i>
                     Equiamentos
                 </a>

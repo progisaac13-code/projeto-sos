@@ -7,11 +7,11 @@
 
 header {
     background: linear-gradient(165deg, #26436Ea5, #6e94caa5);
+    padding: 20px;
 }
 
 header nav .nav-link {
     color: white;
-    width: 100%;
 }
 header nav .nav-link:hover {
     background: white;
