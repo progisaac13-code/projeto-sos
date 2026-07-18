@@ -2,21 +2,16 @@
 require_once("../../database/conexao.php");
 
 $view = $_POST['view'] ?? 'list'; // Obtém o valor do parâmetro 'view' enviado via AJAX, padrão é 'list'
+$cliente = $_POST['cliente'] ?? '';
 ?>
 
-<div class="d-flex flex-wrap align-items-center mb-3">
-    <div class="col-md-3 mx-2">
-        <input type="text" name="pesquisa_cliente" id="pesquisa_cliente" class="form-control" placeholder="Pesquisar Cliente">
-    </div>
-    <div class="col-md-3">
-        <i class="fa-solid fa-table"title="Exibição em Blocos" style="font-size: 18px; color: gray; cursor: pointer;" title="Tabela de Clientes" onclick="buscarListaUsuarios('table')"></i>
-        <i class="fa-solid fa-list" title="Exibição em Tabela" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="buscarListaUsuarios('list')"></i>
-        <i class="fa-solid fa-plus" title="Adicionar Cliente" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="$('#adicionarCliente').modal('show')"></i>
-    </div>
-</div>
 
 <?php
-$query = $pdo->query("SELECT * FROM clientes order by id_cliente desc");
+if ($cliente == '') {
+    $query = $pdo->query("SELECT * FROM clientes order by id_cliente desc");
+} else {
+    $query = $pdo->query("SELECT * FROM clientes WHERE nome like '%$cliente%'");
+}
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (count($res) > 0) {
     if ($view === 'list') {

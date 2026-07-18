@@ -7,6 +7,18 @@ if (isset($_GET['locate'])) {
 }
 ?>
 
+<div class="d-flex flex-wrap align-items-center mb-3">
+    <div class="col-md-3 mx-2">
+        <input type="text" name="pesquisa_cliente" id="pesquisa_cliente" class="form-control" placeholder="Pesquisar Cliente" oninput="pesquisa()">
+    </div>
+    <div class="col-md-3">
+        <i class="fa-solid fa-table" title="Exibição em Blocos" style="font-size: 18px; color: gray; cursor: pointer;" title="Tabela de Clientes" onclick="buscarListaUsuarios('table')"></i>
+        <i class="fa-solid fa-list" title="Exibição em Tabela" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="buscarListaUsuarios('list')"></i>
+        <i class="fa-solid fa-plus" title="Adicionar Cliente" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="$('#adicionarCliente').modal('show')"></i>
+    </div>
+</div>
+
+
 <div class="">
     <div class="lista-usuarios"></div>
 </div>
@@ -185,7 +197,10 @@ if (isset($_GET['locate'])) {
     //     });
     // });
 
-
+    function pesquisa() {
+        var cliente = $('#pesquisa_cliente').val()
+        buscarListaUsuarios('list', cliente)
+    }
 
     $(document).ready(function() {
         // Chama a função para buscar a lista de usuários ao carregar a página
@@ -193,12 +208,13 @@ if (isset($_GET['locate'])) {
     });
 
     // Função para buscar a lista de usuários
-    function buscarListaUsuarios(view) {
+    function buscarListaUsuarios(view, cliente = '') {
         $.ajax({
             url: 'clientes/lista_usuarios.php', // Arquivo PHP que retorna a lista de usuários
             method: 'POST',
             data: {
-                view: view // Envia o parâmetro 'view' para o PHP
+                view: view, // Envia o parâmetro 'view' para o PHP
+                cliente: cliente
             },
             success: function(data) {
                 // Atualiza o conteúdo da div com a lista de usuários

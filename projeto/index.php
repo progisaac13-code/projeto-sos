@@ -38,23 +38,32 @@ if (isset($_GET['pag'])) {
 
 <body>
     <header>
-        <div class="container">
-            <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="../images/logo.png" width="70" class="img-fluid mb-2" alt="Logo">
-                </a>
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="?pag=home" class="nav-link" aria-current="page">Home</a></li>
-                    <li class="nav-item"><a href="?pag=clientes" class="nav-link">Clientes</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Equipamentos</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Log Out</a></li>
-                </ul>
+        <div class="d-flex flex-wrap justify-content-between">
+            <div>
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <div class="navbar-nav">
+                                <a class="nav-link" aria-current="page" href="index.php">
+                                    <i class="fa-solid fa-house"></i>
+                                    Home
+                                </a>
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-hammer"></i>
+                                    Equiamentos
+                                </a>
+                                <a class="nav-link" href="index.php?pag=clientes">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    Clientes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </div>
-            <div class="b-example-divider"></div>
-            <div class="details text-white">
-                <p>Nome do usuário: <?php echo $_SESSION['user_name']; ?> - Código de Entrada: <?php echo "#$" . $_SESSION['user_id'] . "#14FfXz"; ?></p>
-            </div>
-        </div>
         </div>
     </header>
     <div class="pag">
