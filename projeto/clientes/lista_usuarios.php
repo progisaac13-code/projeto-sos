@@ -4,7 +4,7 @@ require_once("../../database/conexao.php");
 $view = $_POST['view'] ?? 'list'; // Obtém o valor do parâmetro 'view' enviado via AJAX, padrão é 'list'
 ?>
 
-<div class="d-flex flex-wrap align-items-center">
+<div class="d-flex flex-wrap align-items-center mb-3">
     <div class="col-md-3 mx-2">
         <input type="text" name="pesquisa_cliente" id="pesquisa_cliente" class="form-control" placeholder="Pesquisar Cliente">
     </div>
@@ -22,7 +22,7 @@ if (count($res) > 0) {
     if ($view === 'list') {
         // Código para exibir a tabela de clientes
 ?>
-        <table id="myTable" class="table table-striped table-bordered display">
+        <table id="myTable" class="table table-striped table-bordered display table-dark">
             <thead>
                 <tr>
                     <th width="500">Incrição - Nome</th>
