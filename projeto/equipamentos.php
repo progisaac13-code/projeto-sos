@@ -27,27 +27,27 @@ $pag = $_GET["pag"];
             <div class="modal-body">
                 <form action="">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-2">
                             <div class="form-floating">
                                 <input type="text" name="nome" id="nome" placeholder="Nome do Equipamento..." class="form-control">
                                 <label for="nome">Nome do Equipamento</label>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-2">
                             <div class="form-floating">
                                 <input type="text" name="valor" id="valor" placeholder="Valor do Produto..." class="form-control">
                                 <label for="valor">Valor do Produto</label>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-2">
                             <div class="form-floating">
                                 <input type="date" name="fabricacao" id="fabricacao" placeholder="Data de Fabricação" class="form-control">
                                 <label for="fabricacao">Data de Fabricação</label>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                                <select name="clientes" id="clientes">
+                                <select name="clientes" id="clientes" class="form-select">
                                     <?php
                                         $query = $pdo->query("SELECT * FROM clientes;");
                                         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -64,13 +64,21 @@ $pag = $_GET["pag"];
                                         }
                                     ?>
                                 </select>
+                                <label for="clientes">Vinculado a Quem(*)</label>
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <textarea name="manutencao" id="manutencao" style="height: 160px;" class="form-control" placeholder="Manutenções que vão ser executada"></textarea>
+                                <label for="manuntencao">Manutenções</label>
+                            </div>    
+                        
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <p>(OBS) O Código do Produto: <span id="cod"></span></p>
+                <p>(OBS) O Código do Equipamento: <span id="cod"></span></p>
                 <div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
                     <button type="button" class="btn btn-primary">Cadastrar Equipamento</button>
