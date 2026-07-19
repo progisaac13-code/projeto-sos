@@ -85,6 +85,7 @@ $pag = $_GET["pag"];
             <div class="modal-footer">
                 <p>(OBS) O Código do Equipamento: <span id="cod"></span></p>
                 <div>
+                    <input type="hidden" id="input_cod">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
                     <button type="button" class="btn btn-primary" onclick="concluir()">Cadastrar Equipamento</button>
                 </div>
@@ -104,6 +105,7 @@ $pag = $_GET["pag"];
         var id_cliente = $('#clientes');
         var manutencao = $('#manutencao');
         var obs = $('#obs').val()
+        var cod = $('#input_cod').val()
 
         $(document).ready(function() {
             $.ajax({
@@ -115,7 +117,8 @@ $pag = $_GET["pag"];
                     fabricacao:fabricacao,
                     id_cliente: id_cliente,
                     manutencao: manutencao,
-                    obs: obs
+                    obs: obs,
+                    cod: cod
                 },
                 success: function(result) {
                     lst();
@@ -143,6 +146,7 @@ $pag = $_GET["pag"];
             data: {},
             success: function(res) {
                 $('#cod').text(res)
+                $('#input_cod').val(res)
             }
         })
         $('#adicionarEQ').modal('show')
