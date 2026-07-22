@@ -106,24 +106,15 @@ $pag = $_GET["pag"];
         var manutencao = $('#manutencao');
         var obs = $('#obs').val()
         var cod = $('#input_cod').val()
+        var lst = [nome, valor, fabricacao, id_cliente, manutencao, obs, cod]
 
-        $(document).ready(function() {
-            $.ajax({
-                url: pag + '/concluir.php',
-                method: 'post',
-                data: {
-                    nome: nome,
-                    valor: valor,
-                    fabricacao:fabricacao,
-                    id_cliente: id_cliente,
-                    manutencao: manutencao,
-                    obs: obs,
-                    cod: cod
-                },
-                success: function(result) {
-                    lst();
-                }
-            })
+        $.ajax({
+            url: pag + '/concluir.php',
+            method: 'post',
+            data: {lst: lst},
+            success: function(result) {
+                lst();
+            }
         })
     }
 
