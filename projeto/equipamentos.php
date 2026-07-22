@@ -98,22 +98,22 @@ $pag = $_GET["pag"];
     var pag = "<?= $pag ?>"
 
     function concluir() {
-
         var nome = $('#nome').val();
-        var valor = $('#valor');
-        var fabricacao = $('#fabricacao');
-        var id_cliente = $('#clientes');
-        var manutencao = $('#manutencao');
+        var valor = $('#valor').val();
+        var fabricacao = $('#fabricacao').val();
+        var id_cliente = $('#clientes').val();
+        var manutencao = $('#manutencao').val();
         var obs = $('#obs').val()
         var cod = $('#input_cod').val()
-        var lst = [nome, valor, fabricacao, id_cliente, manutencao, obs, cod]
 
         $.ajax({
             url: pag + '/concluir.php',
             method: 'post',
-            data: {lst: lst},
+            data: {nome: nome, valor: valor, fabricacao: fabricacao, id_cliente: id_cliente, manutencao: manutencao, obs: obs, cod: cod},
             success: function(result) {
-                lst();
+                if (result == 'Pronto!') {
+                    fecharEQ()
+                }    
             }
         })
     }
