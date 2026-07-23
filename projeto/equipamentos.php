@@ -86,6 +86,7 @@ $pag = $_GET["pag"];
                 <p>(OBS) O Código do Equipamento: <span id="cod"></span></p>
                 <div>
                     <input type="hidden" id="input_cod">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="fecharID" class="d-none"></button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
                     <button type="button" class="btn btn-primary" onclick="concluir()">Cadastrar Equipamento</button>
                 </div>
@@ -111,9 +112,7 @@ $pag = $_GET["pag"];
             method: 'post',
             data: {nome: nome, valor: valor, fabricacao: fabricacao, id_cliente: id_cliente, manutencao: manutencao, obs: obs, cod: cod},
             success: function(result) {
-                if (result == 'Pronto!') {
-                    fecharEQ()
-                }    
+                $('#fecharID').click()
             }
         })
     }
