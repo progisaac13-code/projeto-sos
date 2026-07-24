@@ -9,12 +9,13 @@ if (count($res) > 0) {
     <table class="table">
         <thead>
             <tr>
-                <th>Código</th>
+                <th width="20">Código</th>
                 <th>Equipamento</th>
-                <th>Valor: (R$)</th>
-                <th>Data de Fabricação</th>
+                <th width="20">(R$)</th>
+                <th width="69">Fabricação</th>
                 <th>Manutenções</th>
                 <th>Observações</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -46,6 +47,9 @@ if (count($res) > 0) {
                     <td><?= date('d/m/Y', strtotime($fabricacao)) ?></td>
                     <td><?= $manutencao ?></td>
                     <td><?= mb_strimwidth($obs, 0, 15, "..."); ?></td>
+                    <td>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
                 </tr>
             </tbody>
         <?php
