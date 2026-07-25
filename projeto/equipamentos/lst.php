@@ -23,6 +23,7 @@ if (count($res) > 0) {
         for ($i = 0; $i < count($res); $i++) {
             foreach ($res[$i] as $key => $value) {
             }
+            $id_equipamento = $res[$i]["id_equipamento"];
             $id_cliente = $res[$i]["id_cliente"];
             $nome = $res[$i]["equipamento"];
 
@@ -48,7 +49,8 @@ if (count($res) > 0) {
                     <td><?= $manutencao ?></td>
                     <td><?= mb_strimwidth($obs, 0, 15, "..."); ?></td>
                     <td>
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-trash" style="cursor: pointer;" title="Excluir Equipamento" onclick="del(<?= $id_equipamento ?>)"></i>
+                        <i class="fa-solid fa-pen" style="cursor: pointer;" title="Editar Equipamento" onclick="edit(<?= $id_equipamento ?>)"></i>
                     </td>
                 </tr>
             </tbody>

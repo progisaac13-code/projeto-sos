@@ -95,8 +95,115 @@ $pag = $_GET["pag"];
     </div>
 </div>
 
+
+<div class="modal fade" id="editarEQ" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Equipamento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="fecharEQ()"></button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <div class="form-floating">
+                                <input type="text" name="nome" id="edit_nome" placeholder="Nome do Equipamento..." class="form-control">
+                                <label for="nome">Nome do Equipamento</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="form-floating">
+                                <input type="text" name="valor" id="edit_valor" placeholder="Valor do Produto..." class="form-control">
+                                <label for="valor">Valor do Produto</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="form-floating">
+                                <input type="date" name="fabricacao" id="edit_fabricacao" placeholder="Data de Fabricação" class="form-control">
+                                <label for="fabricacao">Data de Fabricação</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                                <select name="clientes" id="edit_clientes" class="form-select">
+                                    <?php
+                                    $query = $pdo->query("SELECT * FROM clientes;");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    if (count($res) > 0) {
+                                        for ($i = 0; $i < count($res); $i++) {
+                                            $nome = $res[$i]["nome"];
+                                            $inc = $res[$i]["codigo_entrada"];
+                                            $id_cliente = $res[$i]["id_cliente"];
+
+                                    ?>
+                                            <option value="<?= $id_cliente ?>"><?= $inc . " . " . $nome ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <label for="clientes">Vinculado a Quem(*)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-1">
+                            <div class="form-floating">
+                                <textarea name="manutencao" id="edit_manutencao" style="height: 160px;" class="form-control" placeholder="Manutenções que vão ser executada"></textarea>
+                                <label for="manuntencao">Manutenções</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <textarea name="obs" id="edit_obs" style="height: 120px;" class="form-control" placeholder="Observações"></textarea>
+                                <label for="obs">Observaçõoes</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>(OBS) O Código do Equipamento: <span id="cod"></span></p>
+                <div>
+                    <input type="hidden" id="edit_input_cod">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="fecharID" class="d-none"></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="editar()">Cadastrar Equipamento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var pag = "<?= $pag ?>"
+
+    function editar() {
+        var nome = $('#edit_nome').val();
+        var valor = $('#edit_valor').val();
+        var fabricacao = $('#edit_fabricacao').val();
+        var id_cliente = $('#edit_clientes').val();
+        var manutencao = $('#edit_manutencao').val();
+        var obs = $('#edit_obs').val()
+        var cod = $('#edit_input_cod').val()
+
+        $.ajax({
+            url: pag + '/editar.php',
+            method: 'post',
+            data: {
+                nome: nome,
+                valor: valor,
+                fabricacao: fabricacao,
+                id_cliente: id_cliente,
+                manutencao: manutencao,
+                obs: obs,
+                cod: cod
+            },
+            success: function(result) {
+                $('#fecharID').click()
+                lst()
+            }
+        })
+    }
 
     function concluir() {
         var nome = $('#nome').val();
@@ -110,9 +217,18 @@ $pag = $_GET["pag"];
         $.ajax({
             url: pag + '/concluir.php',
             method: 'post',
-            data: {nome: nome, valor: valor, fabricacao: fabricacao, id_cliente: id_cliente, manutencao: manutencao, obs: obs, cod: cod},
+            data: {
+                nome: nome,
+                valor: valor,
+                fabricacao: fabricacao,
+                id_cliente: id_cliente,
+                manutencao: manutencao,
+                obs: obs,
+                cod: cod
+            },
             success: function(result) {
                 $('#fecharID').click()
+                lst()
             }
         })
     }
@@ -149,5 +265,22 @@ $pag = $_GET["pag"];
             data: {}
         })
     }
+
+    function del(id_equipamento) {
+        var r = window.confirm('Tem certeza que deseja excluir?');
+        if (r) {
+            $.ajax({
+                url: pag + '/del.php',
+                method: 'post',
+                data: {
+                    id: id_equipamento
+                },
+                success: function(res) {
+                    lst()
+                }
+            })
+        }
+    }
+
     lst()
 </script>
