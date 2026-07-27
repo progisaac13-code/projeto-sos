@@ -50,7 +50,7 @@ if (count($res) > 0) {
                     <td><?= mb_strimwidth($obs, 0, 15, "..."); ?></td>
                     <td>
                         <i class="fa-solid fa-trash" style="cursor: pointer;" title="Excluir Equipamento" onclick="del(<?= $id_equipamento ?>)"></i>
-                        <i class="fa-solid fa-pen" style="cursor: pointer;" title="Editar Equipamento" onclick="edit(<?= $id_equipamento ?>)"></i>
+                        <i class="fa-solid fa-pen" style="cursor: pointer;" title="Editar Equipamento" onclick="edit(<?= $id_equipamento ?>, <?= $nome ?>, <?= $valor ?>, <?= $fabricacao ?>, <?=  $manutencao ?>, <?= $obs ?>)"></i>
                     </td>
                 </tr>
             </tbody>
