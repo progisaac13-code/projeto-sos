@@ -11,7 +11,20 @@ $pag = $_GET["pag"];
         <i class="fa-solid fa-plus" title="Adicionar Cliente" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="chamarAdicionar()"></i>
     </div>
 </div>
+<div class="upload_img d-none">
+    <div id="dropArea">
+        Arraste uma imagem aqui ou clique
+    </div>
 
+    <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        hidden>
+
+    <div id="preview"></div>
+    <input type="hidden" id="ideq_upload">
+</div>
 <div class="lst-equipamentos">
 
 </div>
@@ -86,7 +99,7 @@ $pag = $_GET["pag"];
                 <p>(OBS) O Código do Equipamento: <span id="cod"></span></p>
                 <div>
                     <input type="hidden" id="input_cod">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="fecharID" class="d-none"></button>
+                    <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal" id="fecharID"></button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
                     <button type="button" class="btn btn-primary" onclick="concluir()">Cadastrar Equipamento</button>
                 </div>
@@ -140,14 +153,14 @@ $pag = $_GET["pag"];
                 </form>
             </div>
             <div class="modal-footer">
-                    <input type="text" id="edit_input_cod">
-                    <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal" id="fecharID"></button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
-                    <button type="button" class="btn btn-primary" onclick="editar()">Cadastrar Equipamento</button>
-                </div>
+                <input type="text" id="edit_input_cod">
+                <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal" id="fecharIDEdit"></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="editar()">Editar Equipamento</button>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -185,10 +198,15 @@ $pag = $_GET["pag"];
                 cod: cod
             },
             success: function(result) {
-                $('#fecharID').click()
+                $('#fecharIDEdit').click()
                 lst()
             }
         })
+    }
+
+    function upload(id) {
+        $('.upload_img').removeClass('d-none')
+        $('#ideq_upload').val(id)
     }
 
     function concluir() {
@@ -267,6 +285,88 @@ $pag = $_GET["pag"];
             })
         }
     }
+
+    const dropArea = document.getElementById("dropArea");
+    const fileInput = document.getElementById("fileInput");
+
+    dropArea.onclick = () => fileInput.click();
+
+    fileInput.onchange = () => {
+
+        enviar(fileInput.files);
+
+    }
+
+    dropArea.addEventListener("dragover", (e) => {
+
+        e.preventDefault();
+        dropArea.classList.add("hover");
+
+    });
+
+    dropArea.addEventListener("dragleave", () => {
+
+        dropArea.classList.remove("hover");
+
+    });
+
+    dropArea.addEventListener("drop", (e) => {
+
+        e.preventDefault();
+
+        dropArea.classList.remove("hover");
+
+        enviar(e.dataTransfer.files);
+
+    });
+
+    function enviar(files) {
+
+        [...files].forEach(file => {
+
+            if (!file.type.startsWith("image/")) {
+
+                alert("Arquivo inválido");
+                return;
+
+            }
+
+            let form = new FormData();
+
+            form.append("foto", file);
+
+            fetch("equipamentos/images.php", {
+
+                    method: "POST",
+                    body: form
+
+                })
+                .then(r => r.text())
+                .then(msg => {
+
+                    console.log(msg);
+
+                });
+
+            // Preview
+
+            let reader = new FileReader();
+
+            reader.onload = function(e) {
+
+                let img = document.createElement("img");
+                img.src = e.target.result;
+
+                document.getElementById("preview").appendChild(img);
+
+            }
+
+            reader.readAsDataURL(file);
+
+        });
+
+    }
+
 
     lst()
 </script>

@@ -49,8 +49,17 @@ if (count($res) > 0) {
                     <td><?= $manutencao ?></td>
                     <td><?= mb_strimwidth($obs, 0, 15, "..."); ?></td>
                     <td>
-                        <i class="fa-solid fa-trash" style="cursor: pointer;" title="Excluir Equipamento" onclick="del(<?= $id_equipamento ?>)"></i>
-                        <i class="fa-solid fa-pen" style="cursor: pointer;" title="Editar Equipamento" onclick="edit(<?= $id_equipamento ?>, <?= $nome ?>, <?= $valor ?>, <?= $fabricacao ?>, <?=  $manutencao ?>, <?= $obs ?>)"></i>
+                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                            <i class="fa-solid fa-trash" style="cursor: pointer; font-size: 20px;" title="Excluir Equipamento" onclick="del(<?= $id_equipamento ?>)"></i>
+                            <i class="fa-solid fa-pen" style="cursor: pointer; font-size: 20px;" title="Editar Equipamento" onclick="edit('<?= $id_equipamento ?>', '<?= $nome ?>', '<?= $valor ?>', '<?= $fabricacao ?>', '<?= $manutencao ?>', '<?= $obs ?>')"></i>
+                            <div class="dropdown">
+                                <i class="fa-solid fa-camera" style=" font-size: 20px; cursor: pointer;" title="Fazer Upload" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="upload(<?= $id_equipamento ?>)">Da Minha Galeria</a></li>
+                                    <li><a class="dropdown-item" href="#">Tirar Foto</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
