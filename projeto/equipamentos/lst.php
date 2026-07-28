@@ -10,7 +10,7 @@ if (count($res) > 0) {
         <thead>
             <tr>
                 <th width="20">Código</th>
-                <th>Equipamento</th>
+                <th width="280">Equipamento</th>
                 <th width="20">(R$)</th>
                 <th width="69">Fabricação</th>
                 <th>Manutenções</th>
@@ -38,7 +38,11 @@ if (count($res) > 0) {
             $query_cli = $pdo->query("SELECT * FROM clientes WHERE id_cliente = '$id_cliente'");
             $res_cli = $query_cli->fetchAll(PDO::FETCH_ASSOC);
 
-            $cliente = $res_cli[0]['nome']
+            $cliente = $res_cli[0]['nome'];
+
+            $query_fotos = $pdo->query("SELECT * FROM imagens_equipamentos WHERE id_equipamento = '$id_equipamento'");
+            $res_fotos = $query_fotos->fetchAll(PDO::FETCH_ASSOC);
+            $imagens = count($res_fotos);
         ?>
             <tbody>
                 <tr>
@@ -53,7 +57,12 @@ if (count($res) > 0) {
                             <i class="fa-solid fa-trash" style="cursor: pointer; font-size: 20px;" title="Excluir Equipamento" onclick="del(<?= $id_equipamento ?>)"></i>
                             <i class="fa-solid fa-pen" style="cursor: pointer; font-size: 20px;" title="Editar Equipamento" onclick="edit('<?= $id_equipamento ?>', '<?= $nome ?>', '<?= $valor ?>', '<?= $fabricacao ?>', '<?= $manutencao ?>', '<?= $obs ?>')"></i>
                             <div class="dropdown">
-                                <i class="fa-solid fa-camera" style=" font-size: 20px; cursor: pointer;" title="Fazer Upload" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <i class="fa-solid fa-camera position-relative" style="font-size:20px; cursor: pointer;" title="Fazer Upload" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 8px;">
+                                        <?= $imagens ?>
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </i>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#" onclick="upload(<?= $id_equipamento ?>)">Da Minha Galeria</a></li>
                                     <li><a class="dropdown-item" href="#">Tirar Foto</a></li>

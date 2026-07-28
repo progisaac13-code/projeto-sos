@@ -2,7 +2,7 @@ body {
     font-family: Arial;
 }
 
-#dropArea {
+#adicionarFotos #dropArea {
 
     width: 500px;
     height: 250px;
@@ -22,14 +22,14 @@ body {
 
 }
 
-#dropArea.hover {
+#adicionarFotos #dropArea.hover {
 
     border-color: #0d6efd;
     background: #eef6ff;
 
 }
 
-#preview img {
+#adicionarFotos #preview img {
 
     width: 150px;
     margin: 10px;

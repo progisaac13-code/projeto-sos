@@ -2,34 +2,54 @@
 $pag = $_GET["pag"];
 ?>
 <div class="d-flex flex-wrap align-items-center mb-3">
+    <div class="">
+        <button class="btn btn-primary" onclick="chamarAdicionar()">Adicionar Cliente <i class="fa-solid fa-plus"></i></button>
+        
+        <i class="fa-solid fa-table-cells"></i>
+        <i class="fa-solid fa-rectangle-list"></i>
+    </div>
     <div class="col-md-3 mx-2">
         <input type="text" name="pesquisa_eq" id="pesquisa_eq" class="form-control" placeholder="Pesquisar Equipamento" oninput="pesquisa()">
     </div>
-    <div class="col-md-3">
-        <i class="fa-solid fa-table" title="Exibição em Blocos" style="font-size: 18px; color: gray; cursor: pointer;" title="Tabela de Clientes" onclick="buscarListaUsuarios('table')"></i>
-        <i class="fa-solid fa-list" title="Exibição em Tabela" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="buscarListaUsuarios('list')"></i>
-        <i class="fa-solid fa-plus" title="Adicionar Cliente" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="chamarAdicionar()"></i>
-    </div>
 </div>
-<div class="upload_img d-none">
-    <div id="dropArea">
-        Arraste uma imagem aqui ou clique
-    </div>
 
-    <input
-        type="file"
-        id="fileInput"
-        accept="image/*"
-        hidden>
-
-    <div id="preview"></div>
-    <input type="hidden" id="ideq_upload">
-</div>
 <div class="lst-equipamentos">
 
 </div>
 
 <!-- Modal -->
+<div class="modal fade" id="adicionarFotos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Insira Fotos do Equipamento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="fecharEQ()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="upload_img">
+                    <div id="dropArea">
+                        Arraste uma imagem aqui ou clique
+                    </div>
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                        hidden>
+
+                    <div id="preview"></div>
+                    <input type="hidden" id="ideq_upload">
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="adicionarEQ" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -153,9 +173,9 @@ $pag = $_GET["pag"];
                 </form>
             </div>
             <div class="modal-footer">
-                <input type="text" id="edit_input_cod">
+                <input type="hidden" id="edit_input_cod">
                 <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal" id="fecharIDEdit"></button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="fecharEQ()">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-primary" onclick="editar()">Editar Equipamento</button>
             </div>
         </div>
@@ -205,7 +225,7 @@ $pag = $_GET["pag"];
     }
 
     function upload(id) {
-        $('.upload_img').removeClass('d-none')
+        $('#adicionarFotos').modal('show')
         $('#ideq_upload').val(id)
     }
 
@@ -321,7 +341,7 @@ $pag = $_GET["pag"];
     });
 
     function enviar(files) {
-
+        var id_equipamento = $('#ideq_upload').val();
         [...files].forEach(file => {
 
             if (!file.type.startsWith("image/")) {
@@ -334,6 +354,7 @@ $pag = $_GET["pag"];
             let form = new FormData();
 
             form.append("foto", file);
+            form.append("id_equipamento", id_equipamento)
 
             fetch("equipamentos/imagens.php", {
 
@@ -344,7 +365,7 @@ $pag = $_GET["pag"];
                 .then(r => r.text())
                 .then(msg => {
 
-                    console.log(msg);
+                    lst()
 
                 });
 
