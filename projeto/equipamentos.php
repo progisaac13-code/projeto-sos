@@ -335,7 +335,7 @@ $pag = $_GET["pag"];
 
             form.append("foto", file);
 
-            fetch("equipamentos/images.php", {
+            fetch("equipamentos/imagens.php", {
 
                     method: "POST",
                     body: form

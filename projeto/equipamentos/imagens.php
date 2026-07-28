@@ -1,7 +1,7 @@
 <?php
 require_once('../../database/conexao.php');
 
-$destino = "../image/equipamentos";
+$destino = "../image/equipamentos/";
 
 if (!is_dir($destino)) {
     mkdir($destino, 0777, true);
