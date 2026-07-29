@@ -1,4 +1,5 @@
 <?php
+require_once("../database/conexao.php");
 $pag = $_GET["pag"];
 ?>
 <div class="d-flex flex-wrap align-items-center mb-3">
@@ -9,7 +10,28 @@ $pag = $_GET["pag"];
         <i class="fa-solid fa-rectangle-list"></i>
     </div>
     <div class="col-md-3 mx-2">
-        <input type="text" name="pesquisa_eq" id="pesquisa_eq" class="form-control" placeholder="Pesquisar Equipamento" oninput="pesquisa()">
+        <div class="form-group">
+            <div class="form-floating">
+                <select name="cliente" id="clientes" class="form-select">
+                    <option value="0" default>Selecione um Cliente</option>
+                    <?php
+                        $query = $pdo->query("SELECT * FROM clientes;");
+                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($res) > 0) {
+                            for ($i = 0; $i < count($res); $i++) {
+                                $id_clientes =  $res[$i]["id_cliente"];
+                                $nome = $res[$i]["nome"];
+
+                                ?>
+                                    <option value="<?= $id_clientes ?>"><?= $nome ?></option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <label for="clientes">Pesquise por Cliente...</label>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -387,6 +409,18 @@ $pag = $_GET["pag"];
         });
 
     }
+
+    $('#clientes').on('change', function() {
+        var id_cliente = $("#clientes").val()
+        $.ajax({
+            url: pag + '/lst.php',
+            method: 'post',
+            data: {id: id_cliente},
+            success: function(result) {
+                $('.lst-equipamentos').html(result)
+            } 
+        })
+    })
 
 
     lst()

@@ -2,7 +2,13 @@
 date_default_timezone_set("America/Sao_Paulo");
 require_once("../../database/conexao.php");
 
-$query = $pdo->query("SELECT * FROM equipamentos ORDER BY id_equipamento DESC");
+$id_cliente = isset($_POST['id']) ? $_POST['id'] : "0";
+
+if ($id_cliente == "0") {
+    $query = $pdo->query("SELECT * FROM equipamentos ORDER BY id_equipamento DESC");
+} else {
+    $query = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id_cliente'");
+}
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (count($res) > 0) {
 ?>
