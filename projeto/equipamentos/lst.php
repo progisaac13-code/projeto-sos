@@ -74,6 +74,7 @@ if (count($res) > 0) {
                                     <li><a class="dropdown-item" href="#">Tirar Foto</a></li>
                                 </ul>
                             </div>
+                            <i class="fa-regular fa-eye" style="cursor: pointer; font-size: 20px;" onclick="fotos(<?= $id_equipamento ?>)"></i>
                         </div>
                     </td>
                 </tr>

@@ -10,6 +10,7 @@ $manutencao = $_POST['manutencao'];
 $obs = $_POST['obs'];
 $cod = $_POST['cod'];
 
+
 $pdo->query("UPDATE equipamentos SET equipamento = '$nome', valor = '$valor', fabricacao = '$fabricacao', id_cliente = '$id_clientes', manutencao = '$manutencao', obs = '$obs' WHERE codigo_eq = '$cod'");
 
 echo "Pronto!";

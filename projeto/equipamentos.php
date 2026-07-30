@@ -5,31 +5,31 @@ $pag = $_GET["pag"];
 <div class="d-flex flex-wrap align-items-center mb-3">
     <div class="">
         <button class="btn btn-primary" onclick="chamarAdicionar()">Adicionar Cliente <i class="fa-solid fa-plus"></i></button>
-        
+
         <i class="fa-solid fa-table-cells"></i>
         <i class="fa-solid fa-rectangle-list"></i>
     </div>
     <div class="col-md-3 mx-2">
         <div class="form-group">
             <div class="form-floating">
-                <select name="cliente" id="clientes" class="form-select">
+                <select name="clientes_select" id="clientes_select" class="form-select">
                     <option value="0" default>Selecione um Cliente</option>
                     <?php
-                        $query = $pdo->query("SELECT * FROM clientes;");
-                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($res) > 0) {
-                            for ($i = 0; $i < count($res); $i++) {
-                                $id_clientes =  $res[$i]["id_cliente"];
-                                $nome = $res[$i]["nome"];
+                    $query = $pdo->query("SELECT * FROM clientes;");
+                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    if (count($res) > 0) {
+                        for ($i = 0; $i < count($res); $i++) {
+                            $id_clientes =  $res[$i]["id_cliente"];
+                            $nome = $res[$i]["nome"];
 
-                                ?>
-                                    <option value="<?= $id_clientes ?>"><?= $nome ?></option>
-                                <?php
-                            }
+                    ?>
+                            <option value="<?= $id_clientes ?>"><?= $nome ?></option>
+                    <?php
                         }
+                    }
                     ?>
                 </select>
-                <label for="clientes">Pesquise por Cliente...</label>
+                <label for="clientes_select">Pesquise por Cliente...</label>
             </div>
         </div>
     </div>
@@ -64,11 +64,11 @@ $pag = $_GET["pag"];
                 </div>
             </div>
             <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -205,6 +205,24 @@ $pag = $_GET["pag"];
 </div>
 </div>
 
+<div class="modal fade" id="showFotos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="show">Olá</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var pag = "<?= $pag ?>"
 
@@ -273,7 +291,7 @@ $pag = $_GET["pag"];
                 cod: cod
             },
             success: function(result) {
-                $('#fecharID').click()
+                $('#adicionarEQ').modal('hide')
                 lst()
             }
         })
@@ -410,18 +428,31 @@ $pag = $_GET["pag"];
 
     }
 
-    $('#clientes').on('change', function() {
-        var id_cliente = $("#clientes").val()
+    $('#clientes_select').on('change', function() {
+        var id_cliente = $("#clientes_select").val()
         $.ajax({
             url: pag + '/lst.php',
             method: 'post',
-            data: {id: id_cliente},
+            data: {
+                id: id_cliente
+            },
             success: function(result) {
                 $('.lst-equipamentos').html(result)
-            } 
+            }
         })
     })
 
+    function fotos(id_equipamento) {
+        $.ajax({
+            url: pag + '/fotos.php',
+            method: 'post',
+            data: {id: id_equipamento},
+            success: function(res) {
+                $('#show').html(res)
+                $('#showFotos').modal('show')
+            }
+        })
+    }
 
     lst()
 </script>
