@@ -49,6 +49,11 @@ if (count($res) > 0) {
             $query_fotos = $pdo->query("SELECT * FROM imagens_equipamentos WHERE id_equipamento = '$id_equipamento'");
             $res_fotos = $query_fotos->fetchAll(PDO::FETCH_ASSOC);
             $imagens = count($res_fotos);
+            if ($imagens > 0) {
+                $class_fotos = 'd-block';
+            } else {
+                $class_fotos = 'd-none';
+            }
         ?>
             <tbody>
                 <tr>
@@ -74,7 +79,7 @@ if (count($res) > 0) {
                                     <li><a class="dropdown-item" href="#">Tirar Foto</a></li>
                                 </ul>
                             </div>
-                            <i class="fa-regular fa-eye" style="cursor: pointer; font-size: 20px;" onclick="fotos(<?= $id_equipamento ?>)"></i>
+                            <i class="fa-regular fa-eye <?= $class_fotos ?>" style="cursor: pointer; font-size: 20px;" onclick="fotos(<?= $id_equipamento ?>)"></i>
                         </div>
                     </td>
                 </tr>
