@@ -67,7 +67,7 @@ if (count($res) > 0) {
             <tbody>
                 <tr>
                     <td><?= $codigo ?></td>
-                    <td><small style="font-size: 12px"><?= $cliente ?></small> | <?= $nome ?></td>
+                    <td><a href="index.php?pag=clientes&id=<?= $id_cliente ?>" style="color: blue; text-decoration: underline;"><small style="font-size: 12px"><?= $cliente ?></small></a> | <?= $nome ?></td>
                     <td><?= $valor ?></td>
                     <td><?= date('d/m/Y', strtotime($fabricacao)) ?></td>
                     <td><?= $manutencao ?></td>

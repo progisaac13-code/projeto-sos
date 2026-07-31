@@ -16,7 +16,7 @@ if (count($res) > 0) {
         <div class="card" style="width: 18rem;">
             <div class="d-flex flex-wrap justify-content-between">
                 <small class="text-dark">#<?= $id ?></small>
-                <i class="fa-solid fa-recycle text-danger mb-3" onclick="recycle(<?php echo $id ?>, <?php echo $id_equipamento ?>)"></i>
+                <i class="fa-solid fa-recycle text-danger mb-3" style="cursos: pointer" onclick="recycle(<?php echo $id ?>, <?php echo $id_equipamento ?>)"></i>
             </div>
             <img src="<?php echo $caminho . $arquivo ?>" alt="" class="card-img-top" width="250">
         </div>

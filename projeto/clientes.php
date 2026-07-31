@@ -5,6 +5,7 @@ $locate = '';
 if (isset($_GET['locate'])) {
     $locate = $_GET['locate'];
 }
+@$id = $_POST['id']
 ?>
 
 <div class="d-flex flex-wrap align-items-center mb-3">
@@ -133,6 +134,7 @@ if (isset($_GET['locate'])) {
 <script>
     var pag = "<?php echo $pag; ?>";
     var locate = "<?php echo $locate; ?>";
+    var id_direto = "<?= $id ?>";
     $(document).ready(function() {
         if (locate) {
             // Se locate não estiver vazio, chama a função para abrir o modal
@@ -204,7 +206,8 @@ if (isset($_GET['locate'])) {
             method: 'POST',
             data: {
                 view: view, // Envia o parâmetro 'view' para o PHP
-                cliente: cliente
+                cliente: cliente,
+                id_direto:id_direto
             },
             success: function(data) {
                 // Atualiza o conteúdo da div com a lista de usuários

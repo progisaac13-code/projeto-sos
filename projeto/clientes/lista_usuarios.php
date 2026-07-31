@@ -3,12 +3,13 @@ require_once("../../database/conexao.php");
 
 $view = $_POST['view'] ?? 'list'; // Obtém o valor do parâmetro 'view' enviado via AJAX, padrão é 'list'
 $cliente = $_POST['cliente'] ?? '';
-?>
-
-
-<?php
+$id_direto = isset($_POST['id_direto']) ? $_POST['id_direto'] : '';
 if ($cliente == '') {
-    $query = $pdo->query("SELECT * FROM clientes order by id_cliente desc");
+    if ($id_direto == '') {
+        $query = $pdo->query("SELECT * FROM clientes order by id_cliente desc");
+    } else {
+        $query = $pdo->query("SELECT * FROM clientes WHERE id_cliente = '$id_direto'");
+    }
 } else {
     $query = $pdo->query("SELECT * FROM clientes WHERE nome like '%$cliente%'");
 }
@@ -39,6 +40,10 @@ if (count($res) > 0) {
                     $endereco = $res[$i]['enredeco'];
                     $equipamentos = $res[$i]['equipamentos'];
 
+                    $query_eq = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id_cliente'");
+                    $res_eq = $query_eq->fetchAll(PDO::FETCH_ASSOC);
+                    $equipamentos = count($res_eq);
+
                     $cod = "#" . $random_inc;
 
                 ?>
@@ -46,7 +51,7 @@ if (count($res) > 0) {
                         <td><?php echo $cod . " - " . $nome; ?></td>
                         <td><?php echo $telefone; ?></td>
                         <td><?php echo $endereco; ?></td>
-                        <td><a href="index.php?pag=equipamentos"><?php echo $equipamentos . " Equipamentos"; ?></a></td>
+                        <td><a href="index.php?pag=equipamentos" style="color: lightblue; text-decoration: underline;"><?php echo $equipamentos . " Equipamentos"; ?></a></td>
                         <td>
                             <a href="#" onclick="deletarCliente(<?php echo $id_cliente ?>)" class="list-icons">
                                 <i class="fa-solid fa-trash-can" title="Excluir Cliente"></i>
