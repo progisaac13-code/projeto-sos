@@ -3,6 +3,7 @@ date_default_timezone_set("America/Sao_Paulo");
 require_once("../../database/conexao.php");
 
 $id_cliente = isset($_POST['id']) ? $_POST['id'] : "0";
+$quipamento = isset($_POST["equipamento"]) ? $_POST["equipamento"] : "";
 
 if ($id_cliente == "0") {
     $query = $pdo->query("SELECT * FROM equipamentos ORDER BY id_equipamento DESC");

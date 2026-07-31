@@ -14,7 +14,7 @@ $pag = $_GET["pag"];
         <i class="fa-solid fa-table-cells"></i>
         <i class="fa-solid fa-rectangle-list"></i>
     </div>
-    <div class="col-md-3 mx-2">
+    <div class="col-md-2 mx-2">
         <div class="form-group">
             <div class="form-floating">
                 <select name="clientes_select" id="clientes_select" class="form-select">
@@ -35,6 +35,14 @@ $pag = $_GET["pag"];
                     ?>
                 </select>
                 <label for="clientes_select">Pesquise por Cliente...</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 mx-2">
+        <div class="form-group">
+            <div class="form-floating">
+                <input type="text" id="pe_equipamento" name="pe_equipamento" class="form-control" placeholder="Pesquisar Equipamento...">
+                <label for="pe_equipamento">Pesquisar Equipamento</label>
             </div>
         </div>
     </div>
@@ -302,11 +310,11 @@ $pag = $_GET["pag"];
         })
     }
 
-    function lst() {
+    function lst(id_equipamento, nome) {
         $.ajax({
             url: pag + '/lst.php',
             method: 'post',
-            data: {},
+            data: {id: id_equipamento, equipamento: nome},
             dataType: 'html',
             success: function(result) {
                 $('.lst-equipamentos').html(result)
@@ -434,17 +442,9 @@ $pag = $_GET["pag"];
     }
 
     $('#clientes_select').on('change', function() {
-        var id_cliente = $("#clientes_select").val()
-        $.ajax({
-            url: pag + '/lst.php',
-            method: 'post',
-            data: {
-                id: id_cliente
-            },
-            success: function(result) {
-                $('.lst-equipamentos').html(result)
-            }
-        })
+        var id_cliente = $("#clientes_select").val();
+        var equipamento = $("#equipamento").val();
+        lst(id_cliente, equipamento)
     })
 
     function fotos(id_equipamento) {
@@ -474,6 +474,12 @@ $pag = $_GET["pag"];
             }
         })
     }
+
+    $('#pe_equipamento').on('change', function() {
+        var equipamento = $("#pe_equipamento").val();
+        var id_cliente = $("#clientes_select").val();
+        lst(id_cliente, equipamento)
+    })
 
     lst()
 </script>
