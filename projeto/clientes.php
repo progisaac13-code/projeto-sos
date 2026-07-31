@@ -12,8 +12,6 @@ if (isset($_GET['locate'])) {
         <input type="text" name="pesquisa_cliente" id="pesquisa_cliente" class="form-control" placeholder="Pesquisar Cliente" oninput="pesquisa()">
     </div>
     <div class="col-md-3">
-        <i class="fa-solid fa-table" title="Exibição em Blocos" style="font-size: 18px; color: gray; cursor: pointer;" title="Tabela de Clientes" onclick="buscarListaUsuarios('table')"></i>
-        <i class="fa-solid fa-list" title="Exibição em Tabela" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="buscarListaUsuarios('list')"></i>
         <i class="fa-solid fa-plus" title="Adicionar Cliente" style="font-size: 18px; color: gray; cursor: pointer;" title="Lista de Clientes" onclick="$('#adicionarCliente').modal('show')"></i>
     </div>
 </div>
@@ -82,10 +80,6 @@ if (isset($_GET['locate'])) {
                             <label for="endereco" class="form-label">Endereço*</label>
                             <input type="text" class="form-control" id="endereco" name="endereco">
                         </div>
-                        <div class="col-md-6">
-                            <label for="cep" class="form-label">CEP*</label>
-                            <input type="text" class="form-control" id="cep" name="cep">
-                        </div>
                     </div>
                 </form>
             </div>
@@ -118,10 +112,6 @@ if (isset($_GET['locate'])) {
                         <div class="col-md-6">
                             <label for="endereco" class="form-label">Endereço</label>
                             <input type="text" class="form-control" id="endereco_cad" name="endereco">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="cep" class="form-label">CEP*</label>
-                            <input type="text" class="form-control" id="cep" name="cep">
                         </div>
                     </div>
                 </form>

@@ -3,12 +3,20 @@ date_default_timezone_set("America/Sao_Paulo");
 require_once("../../database/conexao.php");
 
 $id_cliente = isset($_POST['id']) ? $_POST['id'] : "0";
-$quipamento = isset($_POST["equipamento"]) ? $_POST["equipamento"] : "";
+$equipamento = isset($_POST["equipamento"]) ? $_POST["equipamento"] : "";
 
 if ($id_cliente == "0") {
-    $query = $pdo->query("SELECT * FROM equipamentos ORDER BY id_equipamento DESC");
+    if ($equipamento == "") {
+        $query = $pdo->query("SELECT * FROM equipamentos ORDER BY id_equipamento DESC");
+    } else {
+        $query = $pdo->query("SELECT * FROM equipamentos WHERE equipamento LIKE '%$equipamento%'");
+    }
 } else {
-    $query = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id_cliente'");
+    if ($equipamento == "") {
+        $query = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id_cliente'");
+    } else {
+        $query = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id_cliente' AND equipamento LIKE '%$equipamento%'");
+    }
 }
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 if (count($res) > 0) {
@@ -20,8 +28,8 @@ if (count($res) > 0) {
                 <th width="280">Equipamento</th>
                 <th width="20">(R$)</th>
                 <th width="69">Fabricação</th>
-                <th>Manutenções</th>
-                <th>Observações</th>
+                <th width="500">Manutenções</th>
+                <th width="500">Observações</th>
                 <th></th>
             </tr>
         </thead>

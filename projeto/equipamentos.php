@@ -10,9 +10,6 @@ $pag = $_GET["pag"];
 <div class="d-flex flex-wrap align-items-center mb-3">
     <div class="">
         <button class="btn btn-primary" onclick="chamarAdicionar()">Adicionar Cliente <i class="fa-solid fa-plus"></i></button>
-
-        <i class="fa-solid fa-table-cells"></i>
-        <i class="fa-solid fa-rectangle-list"></i>
     </div>
     <div class="col-md-2 mx-2">
         <div class="form-group">
@@ -475,7 +472,7 @@ $pag = $_GET["pag"];
         })
     }
 
-    $('#pe_equipamento').on('change', function() {
+    $('#pe_equipamento').on('input', function() {
         var equipamento = $("#pe_equipamento").val();
         var id_cliente = $("#clientes_select").val();
         lst(id_cliente, equipamento)
