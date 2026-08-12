@@ -1,7 +1,21 @@
-.hibur-mono-regular {
-  font-family: "Montserrat", monospace;
-  font-weight: 400;
-  font-style: normal;
+/* MODAL */
+#modalMensage {
+    background-color: #ffffff42;
+}
+
+#modalMensage .modal-header {
+    background-color: #302587;
+    color: white;
+}
+
+#modalMensage .modal-header h1 {
+    font-family: 'Montserrat';
+}
+
+#modalMensage .modal-body p#mensage {
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+    font-size: 19px;
 }
 
 * {
@@ -9,19 +23,28 @@
     padding: 0;
 }
 
+h1, h2, h3 {
+    font-family: 'Montserrat';
+    color: white;
+    font-weight: 800;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
 body {
     background: linear-gradient(to right, #302587, white);
 }
 
-.login {
-    padding: 40px;
+.login, .cadastro {
+    padding: 0px 100px;
 }
 
-.login .form-group {
+.form-group {
     margin-bottom: 20px;
 }
 
-.login .form-group input {
+.form-group input {
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
