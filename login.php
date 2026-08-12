@@ -19,8 +19,8 @@ if (count($res) > 0) {
             session_start();
         }
 
-        $_SESSION['user_id'] = $res[0]['id_usuario'];
-        $_SESSION['user_name'] = $res[0]['nome'];
+        $_SESSION['id'] = $res[0]['id_usuario'];
+        $_SESSION['nome'] = $res[0]['nome'];
 
         echo 'success';
     } else {

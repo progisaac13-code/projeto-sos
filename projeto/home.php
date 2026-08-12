@@ -61,6 +61,10 @@
                     <i class="fa-solid fa-people-group"></i>
                     Clientes
                 </a>
+                <a class="nav-link text-white" href="../exit.php">
+                    <i class="fa-solid fa-people-group"></i>
+                    Sair
+                </a>
             </div>
         </div>
     </div>

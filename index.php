@@ -1,5 +1,6 @@
 <?php
 require_once 'database/conexao.php';
+@session_start();
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +49,7 @@ require_once 'database/conexao.php';
         </div>
         <div class="col-md-6 cadastro">
             <form method="post">
-                <h1>Cadastro</h1>
+                <h1><?= $_SESSION['nome'] ?></h1>
                 <div class="form-group">
                     <div class="form-floating">
                         <input type="text" name="nome" id="nome" placeholder="Informe seu nome" class="form-control">
@@ -122,7 +123,7 @@ require_once 'database/conexao.php';
             method: 'post',
             data: {nome: nome, funcao: funcao, email: email, senha: senha},
             success: function(res) {
-                if (res.trim() == "Sucesso!") {
+                if (res === "Sucesso!") {
                     window.location.href = 'projeto/index.php?pag=home';
                 } else {
                     $('#mensage').text(res);

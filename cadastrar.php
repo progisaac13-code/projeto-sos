@@ -15,7 +15,7 @@ $password = password_hash($senha, PASSWORD_DEFAULT);
 
 $pdo->query("INSERT INTO usuario SET nome = '$nome', funcao = '$funcao', email = '$email', senha = '$password'");
 
-if (!($_SESSION['id'])) {
+if (isset($_SESSION['id'])) {
     $query = $pdo->query("SELECT * FROM usuario ORDER BY id_usuario DESC");
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
     $id = $res[0]['id_usuario'];

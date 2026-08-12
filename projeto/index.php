@@ -1,7 +1,7 @@
 <?php
 require_once '../database/conexao.php';
 @session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: ../index.php');
     exit();
 }
@@ -63,6 +63,10 @@ if (isset($_GET['pag'])) {
                                 <a class="nav-link" href="index.php?pag=clientes">
                                     <i class="fa-solid fa-people-group"></i>
                                     Clientes
+                                </a>
+                                <a class="nav-link" href="../exit.php">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    Sair
                                 </a>
                             </div>
                         </div>
