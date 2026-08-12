@@ -32,12 +32,27 @@ h1, h2, h3 {
 h1 {
     margin-bottom: 20px;
 }
-body {
-    background: linear-gradient(to right, #302587, white);
+
+.login {
+    background: #302587;
+}
+
+.cadastro {
+    background: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    background-attachment:scroll;
 }
 
 .login, .cadastro {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
     padding: 0px 100px;
+
 }
 
 .form-group {

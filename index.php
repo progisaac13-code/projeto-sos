@@ -22,10 +22,6 @@ require_once 'database/conexao.php';
 </head>
 
 <body>
-    <div class="text-center my-5">
-        <img src="images/logo.png" width="150" class="img-fluid mb-2" alt="Logo">
-        <h1 class="hibur-mono-regular">Projeto SOS</h1>
-    </div>
     <div class="row">
         <div class="col-md-6 login">
             <h1>Log-in </h1>
@@ -49,7 +45,7 @@ require_once 'database/conexao.php';
         </div>
         <div class="col-md-6 cadastro">
             <form method="post">
-                <h1><?= $_SESSION['nome'] ?></h1>
+                <h1 style="color: black;">Cadastro</h1>
                 <div class="form-group">
                     <div class="form-floating">
                         <input type="text" name="nome" id="nome" placeholder="Informe seu nome" class="form-control">
