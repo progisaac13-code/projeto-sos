@@ -1,5 +1,5 @@
 .hibur-mono-regular {
-  font-family: "Hibur Mono", monospace;
+  font-family: "Montserrat", monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -10,28 +10,28 @@
 }
 
 body {
-    background: linear-gradient(to right, #312584, #E96A12);
+    background: linear-gradient(to right, #302587, white);
 }
 
-div.login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.login form {
-    background-color: #ffffff42;
+.login {
     padding: 40px;
 }
 
-.login form .btn-form {
-    background: rgba(0, 0, 0, 0.623);
-    padding: 15px 20px;
-    color: #fff;
+.login .form-group {
+    margin-bottom: 20px;
 }
 
-.login h1 {
-    font-size: 32px;
-    margin: 0 0 20px 0;
+.login .form-group input {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff42;
+    color: #fff;
+    font-family: "Montserrat", monospace;
+    font-weight: 400;
+    font-style: italic;
 }

@@ -27,6 +27,8 @@ if (count($res) > 0) {
         // Password is incorrect
         echo 'E-mail ou senha incorretos.';
     }
+} else {
+    echo 'E-mail ou senha incorretos.';
 }
 
 
