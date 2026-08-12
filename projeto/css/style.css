@@ -1,63 +1,39 @@
 @charset "UTF-8";
 
 * {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
-header {
-    background: linear-gradient(165deg, #26436Ea5, #6e94caa5);
-    padding: 20px;
+h1,
+h2,
+h3 {
+	font-family: 'Montserrat', sans-serif;
 }
 
-header nav .nav-link {
-    color: white;
-}
-header nav .nav-link:hover {
-    background: white;
-    color: black;
+.info {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.hibur-mono-regular {
-  font-family: "Hibur Mono", monospace;
-  font-weight: 400;
-  font-style: normal;
+.info .clientes {
+	background: linear-gradient(#ffffffa6, #ffffffa6), url('../image/clientes.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	padding: 90px 40px;
+	border-radius: 20px;
+	width: 540px;
 }
 
-.details {
-  margin-top: 20px;
-  font-family: "Hibur Mono", monospace;
-  font-weight: 400;
-  font-style: normal;
+.info .clientes p {
+	font-family: 'Josefin Sans';
+	color: black;
+	font-size: 17px;
 }
 
-.pag {
-    margin: 30px 20px;
-}
-
-.details-user  {
-    padding: 20px;
-}
-
-.details-user .img-user {
-    background: linear-gradient(rgba(0, 0, 0, 0.233), rgba(0, 0, 0, 0)), url('../image/usuario-img.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 200px 0;
-}
-
-.details-user .info-user {
-    padding: 20px;
-}   
-
-.details-user .info-user h3 {
-    font-family: "Hibur Mono", monospace;
-    font-size: 20px;
-    color: #000;
-}
-
-.details-user .info-user h2 {
-    font-size: 40px;
-    color: #000;
+.info .clientes span {
+	font-family: 'Montserrat';
+	font-size: 36px;
+	font-weight: 800;
 }

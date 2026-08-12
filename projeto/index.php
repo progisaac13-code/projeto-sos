@@ -20,18 +20,14 @@ if (isset($_GET['pag'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema SOS</title>
     <!-- SCRIPTS -->
-
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <!-- LINKS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hibur+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-clients.css">
@@ -39,54 +35,54 @@ if (isset($_GET['pag'])) {
 </head>
 
 <body>
-    <header>
-        <div class="d-flex flex-wrap justify-content-between">
-            <div>
-                <img src="../images/logo.png" width="80" alt="Logo">
-            </div>
-            <div>
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <div class="navbar-nav">
-                                <a class="nav-link" aria-current="page" href="index.php">
-                                    <i class="fa-solid fa-house"></i>
-                                    Home
-                                </a>
-                                <a class="nav-link" href="index.php?pag=equipamentos">
-                                    <i class="fa-solid fa-hammer"></i>
-                                    Equiamentos
-                                </a>
-                                <a class="nav-link" href="index.php?pag=clientes">
-                                    <i class="fa-solid fa-people-group"></i>
-                                    Clientes
-                                </a>
-                                <a class="nav-link" href="../exit.php">
-                                    <i class="fa-solid fa-people-group"></i>
-                                    Sair
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+    <div class="d-flex flex-wrap">
+        <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 6.5rem; height: 100vh">
+            <a href="index.php" class="d-block p-3 link-body-emphasis text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                <img src="../images/logo.png" width="80" alt="">
+                <span class="visually-hidden">Icon-only</span>
+            </a>
+            <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                </li>
+                <li title="Clientes">
+                    <a href="index.php?pag=clientes" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Clientes" data-bs-original-title="Clientes">
+                        <i class="fa-solid fa-users"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+                        <i class="fa-solid fa-hammer"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown border-top"> 
+                <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
+                    <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle"> 
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="../exit.php">Sair</a></li>
+                </ul>
             </div>
         </div>
-    </header>
+        <div>
+            <?php
+            if ($pag === 'home') {
+                include 'home.php';
+            } elseif ($pag === 'clientes') {
+                include 'clientes.php';
+            } else if ($pag === 'equipamentos') {
+                include 'equipamentos.php';
+            } else {
+                include 'home.php';
+            }
+            ?>
+
+        </div>
+    </div>
     <div class="pag">
-        <?php
-        if ($pag === 'home') {
-            include 'home.php';
-        } elseif ($pag === 'clientes') {
-            include 'clientes.php';
-        } else if ($pag === 'equipamentos') {
-            include 'equipamentos.php';
-        } else {
-            include 'home.php';
-        }
-        ?>
     </div>
 </body>
 
