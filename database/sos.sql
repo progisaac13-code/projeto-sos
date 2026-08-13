@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/08/2026 às 23:42
+-- Tempo de geração: 13/08/2026 às 05:31
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -24,36 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `blocked`
---
-
-CREATE TABLE `blocked` (
-  `id` int(11) NOT NULL,
-  `domain` varchar(255) NOT NULL,
-  `active` tinyint(1) DEFAULT 1,
-  `data_acesso` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `blocked`
---
-
-INSERT INTO `blocked` (`id`, `domain`, `active`, `data_acesso`) VALUES
-(1, 'youtube.com', 1, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
-  `codigo_entrada` varchar(80) DEFAULT NULL,
   `nome` varchar(80) DEFAULT NULL,
+  `cpf` varchar(20) NOT NULL,
   `telefone` varchar(20) DEFAULT NULL,
   `enredeco` varchar(100) DEFAULT NULL,
-  `cep` varchar(20) DEFAULT NULL,
   `equipamentos` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -61,9 +40,8 @@ CREATE TABLE `clientes` (
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `codigo_entrada`, `nome`, `telefone`, `enredeco`, `cep`, `equipamentos`) VALUES
-(3, '486171861.3', 'Fulano de Tal', '62991402243', 'Av. segunda Radial, 173', '', 0),
-(4, '799817983.4', 'Isaac', '62991402243', 'Rua 1049, St. Pedro Ludovico', '1', 0);
+INSERT INTO `clientes` (`id_cliente`, `nome`, `cpf`, `telefone`, `enredeco`, `equipamentos`) VALUES
+(1, 'Isaac Rocha', '70631871128', '62991402243', 'Av. Circular, 173', 0);
 
 -- --------------------------------------------------------
 
@@ -73,23 +51,11 @@ INSERT INTO `clientes` (`id_cliente`, `codigo_entrada`, `nome`, `telefone`, `enr
 
 CREATE TABLE `equipamentos` (
   `id_equipamento` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT 0,
-  `codigo_eq` varchar(200) NOT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
   `equipamento` varchar(100) NOT NULL,
-  `valor` int(11) NOT NULL,
-  `fabricacao` date DEFAULT NULL,
-  `manutencao` text DEFAULT NULL,
-  `obs` text DEFAULT NULL
+  `valor` varchar(10) NOT NULL,
+  `fabricacao` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `equipamentos`
---
-
-INSERT INTO `equipamentos` (`id_equipamento`, `id_cliente`, `codigo_eq`, `equipamento`, `valor`, `fabricacao`, `manutencao`, `obs`) VALUES
-(1, 3, '1442481751', 'Maquina de Louças', 700, '2026-07-05', 'qq', 'qqq'),
-(2, 4, '2917031232', 'Secadora', 700, '2026-07-05', 'Olá', 'Mundo!'),
-(4, 3, '4306347694', 'Lavadoura', 1200, '2026-07-31', '', '');
 
 -- --------------------------------------------------------
 
@@ -112,6 +78,7 @@ CREATE TABLE `imagens_equipamentos` (
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(80) NOT NULL,
+  `funcao` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -120,31 +87,32 @@ CREATE TABLE `usuario` (
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`) VALUES
-(1, 'Isaac', 'prog.isaac13@gmail.com', '$2y$10$4JxJF1c1t/MPeM/3h0TA9uPzsne.BC5qnefHX75w1BCwCy6sR4z3y');
+INSERT INTO `usuario` (`id_usuario`, `nome`, `funcao`, `email`, `senha`) VALUES
+(1, 'Isaac', 'Gerente', 'operadordc.isaac@gmail.com', '$2y$10$Y4FAQhf1FkirpUPYu.dR2ezx.LoeS1L0ImY.Ts.AVDJVI1usBks5G'),
+(2, 'Creuza', 'Markting', 'creuza@gmail.com', '$2y$10$RIZoU5XfQg9FP1WEv9GF5uFkxK6INhroM9B4n54wz0UVX6vxeipIe'),
+(3, 'Martina', 'Markting', 'martina@gmail.com', '$2y$10$qzBtHcT3iHDXzJ0VTmcXDO3F/vXoT1JK1/DR04PxKqjFluzZJydPm'),
+(4, 'Jorisvaldo', 'Mecânico', 'joris@gmail.com', '$2y$10$NjgFU9U9OT3m/fpP5gZp0OJyFPkUm1SyxbwXezRZf2B.IBWqFWaIW'),
+(5, 'Clodildi', 'RH', 'cloclo@gmail.com', '$2y$10$uAwxvkQoCtnU13z0PqJVButilTkrePKSmPXimsmEbeppSNhVeFEn6'),
+(6, 'Dog', 'Vendedor', 'Dog@gmail.com', '$2y$10$Ry1UdVJ9.uh2HgGtC79mYOlkjIpO/yd8Jddz/bchlDTBfBN86mP8S'),
+(7, 'Cachorro', 'Vender', 'do@gmail.com', '$2y$10$VOwb7Bre6eEWrk.TwPm3UeH8xswK/IS3LfuC4l2cDL3WYrvyIUgTq');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `blocked`
---
-ALTER TABLE `blocked`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `domain` (`domain`);
-
---
 -- Índices de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id_cliente`);
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD UNIQUE KEY `cpf` (`cpf`);
 
 --
 -- Índices de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  ADD PRIMARY KEY (`id_equipamento`);
+  ADD PRIMARY KEY (`id_equipamento`),
+  ADD KEY `id_cliente` (`id_cliente`);
 
 --
 -- Índices de tabela `imagens_equipamentos`
@@ -163,34 +131,38 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de tabela `blocked`
---
-ALTER TABLE `blocked`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  MODIFY `id_equipamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_equipamento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `imagens_equipamentos`
 --
 ALTER TABLE `imagens_equipamentos`
-  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `equipamentos`
+--
+ALTER TABLE `equipamentos`
+  ADD CONSTRAINT `equipamentos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
