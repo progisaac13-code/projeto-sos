@@ -1,17 +1,15 @@
 <?php
 @session_start();
 ?>
-<div class="container">
-    <h1>Olá, <?= $_SESSION['nome'] ?>. Alguns dados do Sistema pra você!</h1>
-    <hr>
-    <div class="info">
-        <div class="clientes">
-            <h3>CLIENTES</h3>
-            <hr>
-            <div>
-                <p>Números Atualizados de Clientes:</p>
-                <span id="clientes"></span>
-            </div>
+<h1>Olá, <?= $_SESSION['nome'] ?>. Alguns dados do Sistema pra você!</h1>
+<hr>
+<div class="info">
+    <div class="clientes">
+        <h3>CLIENTES</h3>
+        <hr>
+        <div>
+            <p>Números Atualizados de Clientes:</p>
+            <span id="clientes"></span>
         </div>
     </div>
 </div>

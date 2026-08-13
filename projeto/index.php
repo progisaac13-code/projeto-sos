@@ -6,6 +6,8 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
+$active = 'active';
+
 $pag = '';
 if (isset($_GET['pag'])) {
     $pag = $_GET['pag'];
@@ -36,43 +38,45 @@ if (isset($_GET['pag'])) {
 
 <body>
     <div class="d-flex flex-wrap">
-        <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 6.5rem; height: 100vh">
-            <a href="index.php" class="d-block p-3 link-body-emphasis text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-                <img src="../images/logo.png" width="80" alt="">
-                <span class="visually-hidden">Icon-only</span>
-            </a>
-            <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
-                        <i class="fa-solid fa-house"></i>
-                    </a>
-                </li>
-                <li title="Clientes">
-                    <a href="index.php?pag=clientes" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Clientes" data-bs-original-title="Clientes">
-                        <i class="fa-solid fa-users"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
-                        <i class="fa-solid fa-hammer"></i>
-                    </a>
-                </li>
-            </ul>
-            <div class="dropdown border-top"> 
-                <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
-                    <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle"> 
+        <div>
+            <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 6.5rem; height: 100vh">
+                <a href="index.php" class="d-block p-3 link-body-emphasis text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                    <img src="../images/logo.png" width="80" alt="">
+                    <span class="visually-hidden">Icon-only</span>
                 </a>
-                <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="../exit.php">Sair</a></li>
+                <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                    <li class="nav-item">
+                        <a href="index.php" class="nav-link <?= ($pag=='') ? 'active' : '' ?> py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+                            <i class="fa-solid fa-house"></i>
+                        </a>
+                    </li>
+                    <li title="Clientes">
+                        <a href="index.php?pag=cliente" class="nav-link <?= ($pag=='cliente') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Clientes" data-bs-original-title="Clientes">
+                            <i class="fa-solid fa-users"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link <?= ($pag=='equipamentos') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+                            <i class="fa-solid fa-hammer"></i>
+                        </a>
+                    </li>
                 </ul>
+                <div class="dropdown border-top">
+                    <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="../exit.php">Sair</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div>
+        <div class="main-content">
             <?php
             if ($pag === 'home') {
                 include 'home.php';
-            } elseif ($pag === 'clientes') {
-                include 'clientes.php';
+            } elseif ($pag === 'cliente') {
+                include 'cliente.php';
             } else if ($pag === 'equipamentos') {
                 include 'equipamentos.php';
             } else {
