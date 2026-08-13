@@ -6,9 +6,9 @@ $query = $pdo->query("SELECT * FROM clientes ORDER BY id_cliente DESC");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <script>
-    const t2 = new DataTable('.t2', {});
+    const t1 = new DataTable('.t1', {});
 </script>
-<table class="table t2">
+<table class="table t1">
     <thead>
         <tr>
             <th>Nome</th>

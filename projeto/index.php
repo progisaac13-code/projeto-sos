@@ -22,13 +22,12 @@ if (isset($_GET['pag'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema SOS</title>
     <!-- SCRIPTS -->
-    <script src="https://cdn.datatables.net/v/dt/dt-3.0.0/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../dataTable/DataTables/datatables.min.js"></script>
     <!-- LINKS -->
-    <link href="https://cdn.datatables.net/v/dt/dt-3.0.0/datatables.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <link rel="stylesheet" href="../dataTable/DataTables/datatables.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
@@ -37,6 +36,7 @@ if (isset($_GET['pag'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-clients.css">
     <link rel="stylesheet" href="css/style-equipamentos.css">
+
 </head>
 
 <body>
@@ -113,5 +113,8 @@ if (isset($_GET['pag'])) {
     </div>
 </div>
 
+<script>
+    
+</script>
 
 </html>

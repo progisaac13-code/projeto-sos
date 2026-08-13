@@ -63,12 +63,12 @@
         <div class="col-md-9 px-5">
             <h5>Clientes Recém Cadastrados</h5>
             <hr>
-            <div class="lista"></div>
+            <div class="listaSimples"></div>
         </div>
     </div>
 </div>
 <div id="listView" class="d-none">
-    <div class="lista"></div>
+    <div class="listaCompleta"></div>
 </div>
 <div id="locationView" class="d-none">
     Olá, Mundo 2
@@ -78,7 +78,6 @@
 </div>
 
 <script>
-    const table = new DataTable('#myTable');
     var pag = "<?= $_GET['pag']; ?>"
 
 
@@ -148,7 +147,18 @@
             method: 'post',
             data: {},
             success: function(resp) {
-                $('.lista').html(resp)
+                $('.listaSimples').html(resp)
+            }
+        })
+    }
+
+    function listaCompleta() {
+        $.ajax({
+            url: pag + '/lista_completa.php',
+            method: 'post',
+            data: {},
+            success: function(resp) {
+                $('.listaCompleta').html(resp)
             }
         })
     }
@@ -175,6 +185,6 @@
             }
         })
     })
-
     lista()
+    listaCompleta();
 </script>
