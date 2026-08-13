@@ -2,7 +2,13 @@
 @session_start();
 require_once('../../database/conexao.php');
 
-$query = $pdo->query("SELECT * FROM clientes ORDER BY id_cliente DESC");
+$id = $_POST['id'] ?? '';
+
+if ($id == '') {
+    $query = $pdo->query("SELECT * FROM clientes ORDER BY id_cliente DESC");
+} else {
+    $query = $pdo->query("SELECT * FROM clientes WHERE id_cliente = '$id'");
+}
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <script>

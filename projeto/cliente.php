@@ -56,13 +56,12 @@
                     </div>
                 </div>
                 <div class="row">
+                    <input type="hidden" name="id_cliente" id="id_cliente">
                     <div class="btn btn-primary" id="upDados">Cadastrar Cliente</div>
                 </div>
             </form>
         </div>
         <div class="col-md-9 px-5">
-            <h5>Clientes Recém Cadastrados</h5>
-            <hr>
             <div class="listaSimples"></div>
         </div>
     </div>
@@ -141,11 +140,13 @@
         alternar();
     })
 
-    function lista() {
+    function lista(id='') {
         $.ajax({
             url: pag + '/lista_simple.php',
             method: 'post',
-            data: {},
+            data: {
+                id: id
+            },
             success: function(resp) {
                 $('.listaSimples').html(resp)
             }
@@ -164,6 +165,7 @@
     }
 
     $("#upDados").click(function() {
+        var id = $('#id_cliente').val();
         var nome = $('#nome').val();
         var cpf = $("#cpf").val();
         var telefone = $('#telefone').val();
@@ -173,6 +175,7 @@
             url: pag + '/adicionar_cliente.php',
             method: 'post',
             data: {
+                id: id,
                 nome: nome,
                 cpf: cpf,
                 telefone: telefone,
@@ -207,6 +210,23 @@
                 }
             })
         }
+    }
+
+    function editar(id, nome, cpf, telefone, endereco) {
+        event.preventDefault()
+
+        let client = document.getElementById('newClient');
+        if (!(client.checked)) {
+            client.checked = true;
+        }
+        alternar();
+        $('#id_cliente').val(id)
+        $('#nome').val(nome)
+        $('#cpf').val(cpf)
+        $("#endereco").val(endereco)
+        $('#telefone').val(telefone)
+        $('#upDados').text("Salvar")
+        lista(id)
     }
 
     lista()
