@@ -182,9 +182,33 @@
                 $('#mensage').text(msg);
                 $('#btnClose').text('Fechar');
                 $('#modalMensage').modal('show');
+                lista()
+                listaCompleta()
             }
         })
     })
+
+    function excluir(id) {
+        var r = confirm('Tem certeza que deseja excluir este Cliente?')
+        event.preventDefault();
+        if (r) {
+            $.ajax({
+                url: pag + '/excluir.php',
+                method: 'post',
+                data: {
+                    id: id
+                },
+                success: function(msg) {
+                    $('#mensage').text(msg);
+                    $('#btnClose').text('Fechar');
+                    $('#modalMensage').modal('show');
+                    listaCompleta()
+                    lista()
+                }
+            })
+        }
+    }
+
     lista()
     listaCompleta();
 </script>

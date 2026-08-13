@@ -16,12 +16,14 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
             <th>Telefone</th>
             <th>Endereço</th>
             <th>Equipamento(s)</th>
+            <th>Opções</th>
         </tr>
     </thead>
     <tbody>
         <?php
         if (count($res) > 0) {
             for ($i = 0; $i < count($res); $i++) {
+                $id = $res[$i]['id_cliente'];
                 $nome = $res[$i]['nome'];
                 $cpf = $res[$i]['cpf'];
                 $telefone = $res[$i]['telefone'];
@@ -40,6 +42,13 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $telefone ?></td>
                     <td><?= $endereco ?></td>
                     <td><?= $tot_eq ?></td>
+                    <td>
+                        <a href=""><i class="fa-regular fa-map icon-op"></i></a>
+                        <a href="" onclick="excluir('<?= $id ?>')" title="Excluir Cliente"><i class="fa-solid fa-trash icon-op"></i></a>
+                        <a href="" onclick="editar('<?= $id ?>', '<?= $nome ?>', '<?= $cpf ?>', '<?= $telefone ?>', '<?= $endereco ?>')" title="Editar Cliente"><i class="fa-solid fa-pen-to-square icon-op"></i></a>
+                        <a href=""><i class="fa-brands fa-whatsapp icon-op"></i></a>
+                        <a href=""><i class="fa-solid fa-phone icon-op"></i></a>
+                    </td>
                 </tr>
         <?php
             }

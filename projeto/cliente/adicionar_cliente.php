@@ -12,6 +12,15 @@ if (!(validar_cpf($cpf))) {
     exit;
 }
 
+$cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+$query_cpf = $pdo->query("SELECT * FROM clientes WHERE cpf = '$cpf'");
+$res_cpf = $query_cpf->fetchAll(PDO::FETCH_ASSOC);
+if (count($res_cpf) > 0) {
+    echo "CPF Já Cadastrado! Por favor, tente novamente.";
+    exit;
+}
+
 $query = $pdo->query("INSERT INTO clientes (nome, cpf, telefone, enredeco, equipamentos) VALUES ('$nome', '$cpf', '$telefone', '$endereco', '0')");
 if ($query) {
     echo "Cliente adicionado com sucesso.";
