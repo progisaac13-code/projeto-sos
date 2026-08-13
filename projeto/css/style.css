@@ -11,6 +11,27 @@ h3 {
 	font-family: 'Montserrat', sans-serif;
 }
 
+/* MODAL */
+#modalMensage {
+    background-color: #ffffff42;
+}
+
+#modalMensage .modal-header {
+    background-color: #302587;
+    color: white;
+}
+
+#modalMensage .modal-header h1 {
+    font-family: 'Montserrat';
+}
+
+#modalMensage .modal-body p#mensage {
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+    font-size: 19px;
+}
+
+
 .info {
 	display: flex;
 	flex-wrap: wrap;

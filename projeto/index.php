@@ -22,10 +22,13 @@ if (isset($_GET['pag'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema SOS</title>
     <!-- SCRIPTS -->
+    <script src="https://cdn.datatables.net/v/dt/dt-3.0.0/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <!-- LINKS -->
+    <link href="https://cdn.datatables.net/v/dt/dt-3.0.0/datatables.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
@@ -46,17 +49,17 @@ if (isset($_GET['pag'])) {
                 </a>
                 <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                     <li class="nav-item">
-                        <a href="index.php" class="nav-link <?= ($pag=='') ? 'active' : '' ?> py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+                        <a href="index.php" class="nav-link <?= ($pag == '') ? 'active' : '' ?> py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
                             <i class="fa-solid fa-house"></i>
                         </a>
                     </li>
                     <li title="Clientes">
-                        <a href="index.php?pag=cliente" class="nav-link <?= ($pag=='cliente') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Clientes" data-bs-original-title="Clientes">
+                        <a href="index.php?pag=cliente" class="nav-link <?= ($pag == 'cliente') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Clientes" data-bs-original-title="Clientes">
                             <i class="fa-solid fa-users"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link <?= ($pag=='equipamentos') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+                        <a href="#" class="nav-link <?= ($pag == 'equipamentos') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
                             <i class="fa-solid fa-hammer"></i>
                         </a>
                     </li>
@@ -89,5 +92,26 @@ if (isset($_GET['pag'])) {
     <div class="pag">
     </div>
 </body>
+
+<div class="modal fade" id="modalMensage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Atenção!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <img src="../images/alert.png" alt="Atenção!" width="200" class="img-fluid">
+                </div>
+                <p id="mensage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnClose" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </html>
