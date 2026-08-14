@@ -45,7 +45,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $endereco ?></td>
                     <td><?= $tot_eq ?></td>
                     <td>
-                        <a href=""><i class="fa-regular fa-map icon-op"></i></a>
+                        <a href="" onclick="maps(<?= $id ?>)" title="Vizualizar Localização"><i class="fa-regular fa-map icon-op"></i></a>
                         <a href="" onclick="excluir('<?= $id ?>')" title="Excluir Cliente"><i class="fa-solid fa-trash icon-op"></i></a>
                         <a href="" onclick="editar('<?= $id ?>', '<?= $nome ?>', '<?= $cpf ?>', '<?= $telefone ?>', '<?= $endereco ?>')" title="Editar Cliente"><i class="fa-solid fa-pen-to-square icon-op"></i></a>
                         <a href="https://wa.me/<?= $telefone ?>?text=<?= urlencode(WHATSAPP_MENSAGEM) ?>" target="_blank" title="WHatsApp"><i class="fa-brands fa-whatsapp icon-op"></i></a>

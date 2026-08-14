@@ -70,7 +70,9 @@
     <div class="listaCompleta"></div>
 </div>
 <div id="locationView" class="d-none">
-    Olá, Mundo 2
+    <h3 class="p-3 text-center">Visualize a localização dos Seus Clientes</h3>
+    <hr>
+    <div class="location"></div>
 </div>
 <div id="edit" class="d-none">
     Olá, Mundo 3
@@ -228,6 +230,25 @@
         $('#upDados').text('Salvar Alteração')
 
         lista(id)
+    }
+
+    function maps(id) {
+        event.preventDefault();
+
+        let location = document.getElementById('location');
+        if (!(location.checked)) {
+            location.checked = true;
+        }
+        alternar();
+
+        $.ajax({
+            url: pag + '/location.php',
+            method: 'post',
+            data: {id: id},
+            success: function(html) {
+                $('.location').html(html)
+            }
+        })
     }
 
     $(document).ready(function() {
