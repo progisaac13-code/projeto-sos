@@ -1,6 +1,7 @@
 <?php
 @session_start();
 require_once('../../database/conexao.php');
+require_once('../../database/config.php');
 
 $query = $pdo->query("SELECT * FROM clientes ORDER BY id_cliente DESC");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -30,6 +31,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 $endereco = $res[$i]['enredeco'];
 
                 $cpf = preg_replace('/[^0-9]/', '', $cpf);
+                $telefone = preg_replace('/[^0-9]/', '', $telefone);
 
                 $query_eq = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$_SESSION[id]'");
                 $res_eq = $query_eq->fetchAll(PDO::FETCH_ASSOC);
@@ -46,8 +48,8 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                         <a href=""><i class="fa-regular fa-map icon-op"></i></a>
                         <a href="" onclick="excluir('<?= $id ?>')" title="Excluir Cliente"><i class="fa-solid fa-trash icon-op"></i></a>
                         <a href="" onclick="editar('<?= $id ?>', '<?= $nome ?>', '<?= $cpf ?>', '<?= $telefone ?>', '<?= $endereco ?>')" title="Editar Cliente"><i class="fa-solid fa-pen-to-square icon-op"></i></a>
-                        <a href=""><i class="fa-brands fa-whatsapp icon-op"></i></a>
-                        <a href=""><i class="fa-solid fa-phone icon-op"></i></a>
+                        <a href="https://wa.me/<?= $telefone ?>?text=<?= urlencode(WHATSAPP_MENSAGEM) ?>" target="_blank" title="WHatsApp"><i class="fa-brands fa-whatsapp icon-op"></i></a>
+                        <a href="tel:<?= $telefone ?>" title="Ligar"><i class="fa-solid fa-phone icon-op"></i></a>
                     </td>
                 </tr>
         <?php
