@@ -58,8 +58,8 @@ if (isset($_GET['pag'])) {
                             <i class="fa-solid fa-users"></i>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link <?= ($pag == 'equipamentos') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+                    <li title="Equipamentos">
+                        <a href="index.php?pag=equipamentos" class="nav-link <?= ($pag == 'equipamentos') ? 'active' : '' ?> py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
                             <i class="fa-solid fa-hammer"></i>
                         </a>
                     </li>
@@ -81,7 +81,7 @@ if (isset($_GET['pag'])) {
             } elseif ($pag === 'cliente') {
                 include 'cliente.php';
             } else if ($pag === 'equipamentos') {
-                include 'equipamentos.php';
+                include 'equipamento.php';
             } else {
                 include 'home.php';
             }
