@@ -9,7 +9,6 @@
     <label class="btn btn-outline-primary" for="location">Maps/Localização</label>
 
     <input type="radio" class="btn-check" name="btnradio" id="editClient" autocomplete="off">
-    <label class="btn btn-outline-primary" for="editClient">Editar Cliente</label>
 </div>
 <div id="novoCliente" class="d-block mx-auto">
     <div class="d-flex flex-wrap">
@@ -17,6 +16,12 @@
             <h5>Formulário de Cadastro de Clientes</h5>
             <p>Preencha corretamente os dados Abaixo:</p>
             <form method="post">
+                <div class="row">
+                    <div class="col mb-3 text-center">
+                        <img src="image/icon-user.jpg" width="250" class="rounded" id="foto" accept="image/*" alt="Foto de Perfil do Cliente" onclick="$('#foto_cliente').click()" style="cursor: pointer" title="Alterar Foto">
+                        <input type="file" name="foto_cliente" id="foto_cliente" onchange="carregarImagem(this, 'foto')" hidden>
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <div class="col">
                         <div class="form-group">
@@ -142,7 +147,7 @@
         alternar();
     })
 
-    function lista(id='') {
+    function lista(id = '') {
         $.ajax({
             url: pag + '/lista_simple.php',
             method: 'post',
@@ -214,9 +219,10 @@
         }
     }
 
-    function editar(id, nome, cpf, telefone, endereco) {
+    function editar(id, nome, cpf, telefone, endereco, foto) {
         event.preventDefault()
 
+        let image = document.getElementById('foto')
         let client = document.getElementById('newClient');
         if (!(client.checked)) {
             client.checked = true;
@@ -227,6 +233,7 @@
         $('#cpf').val(cpf)
         $("#endereco").val(endereco)
         $('#telefone').val(telefone)
+        image.src = 'image/clientes/' + foto
         $('#upDados').text('Salvar Alteração')
 
         lista(id)
@@ -244,16 +251,72 @@
         $.ajax({
             url: pag + '/location.php',
             method: 'post',
-            data: {id: id},
+            data: {
+                id: id
+            },
             success: function(html) {
                 $('.location').html(html)
             }
         })
     }
 
+    function carregarImagem(input, previewId) {
+        const arquivo = input.files[0];
+
+        if (!arquivo) {
+            return;
+        }
+
+        // Verifica se é imagem
+        if (!arquivo.type.startsWith('image/')) {
+            alert('Selecione uma imagem válida.');
+            input.value = '';
+            return;
+        }
+
+        // Limite de 5 MB
+        if (arquivo.size > 5 * 1024 * 1024) {
+            alert('A imagem deve ter no máximo 5 MB.');
+            input.value = '';
+            return;
+        }
+
+        const preview = document.getElementById(previewId);
+
+        const leitor = new FileReader();
+
+        leitor.onload = function(event) {
+            preview.src = event.target.result;
+        };
+
+        leitor.readAsDataURL(arquivo);
+        enviar(arquivo)
+    }
+
+    function enviar(arquivo) {
+        var id_cliente = $('#id_cliente').val();
+
+        let form = new FormData();
+
+        form.append("foto", arquivo);
+        form.append("id_cliente", id_cliente)
+
+        fetch(pag + "/foto.php", {
+
+                method: "POST",
+                body: form
+
+            })
+            .then(r => r.text())
+            .then(msg => {
+                $('#mensage').text(msg);
+                $('#btnClose').text('Fechar');
+                $('#modalMensage').modal('show');
+            });
+    }
+
     $(document).ready(function() {
         lista()
         listaCompleta()
     })
-
 </script>

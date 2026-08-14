@@ -12,6 +12,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 <table class="table t1 table-striped-columns">
     <thead>
         <tr>
+            <th>Foto</th>
             <th>Nome</th>
             <th>CPF</th>
             <th>Telefone</th>
@@ -29,6 +30,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 $cpf = $res[$i]['cpf'];
                 $telefone = $res[$i]['telefone'];
                 $endereco = $res[$i]['enredeco'];
+                $foto = $res[$i]['foto'] ?? 'icon-user.jpg';
 
                 $cpf = preg_replace('/[^0-9]/', '', $cpf);
                 $telefone = preg_replace('/[^0-9]/', '', $telefone);
@@ -39,6 +41,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
                 <tr>
+                    <td><img src="image/clientes/<?= $foto ?>" width="30" alt="Foto do Cliente" class="rounded text-center"></td>
                     <td><?= $nome ?></td>
                     <td><?= $cpf ?></td>
                     <td><?= $telefone ?></td>
@@ -47,7 +50,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     <td>
                         <a href="" onclick="maps(<?= $id ?>)" title="Vizualizar Localização"><i class="fa-regular fa-map icon-op"></i></a>
                         <a href="" onclick="excluir('<?= $id ?>')" title="Excluir Cliente"><i class="fa-solid fa-trash icon-op"></i></a>
-                        <a href="" onclick="editar('<?= $id ?>', '<?= $nome ?>', '<?= $cpf ?>', '<?= $telefone ?>', '<?= $endereco ?>')" title="Editar Cliente"><i class="fa-solid fa-pen-to-square icon-op"></i></a>
+                        <a href="" onclick="editar('<?= $id ?>', '<?= $nome ?>', '<?= $cpf ?>', '<?= $telefone ?>', '<?= $endereco ?>', '<?= $foto ?>')" title="Editar Cliente"><i class="fa-solid fa-pen-to-square icon-op"></i></a>
                         <a href="https://wa.me/<?= $telefone ?>?text=<?= urlencode(WHATSAPP_MENSAGEM) ?>" target="_blank" title="WHatsApp"><i class="fa-brands fa-whatsapp icon-op"></i></a>
                         <a href="tel:<?= $telefone ?>" title="Ligar"><i class="fa-solid fa-phone icon-op"></i></a>
                     </td>
