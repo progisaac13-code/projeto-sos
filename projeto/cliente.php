@@ -225,10 +225,14 @@
         $('#cpf').val(cpf)
         $("#endereco").val(endereco)
         $('#telefone').val(telefone)
-        $('#upDados').text("Salvar")
+        $('#upDados').text('Salvar Alteração')
+
         lista(id)
     }
 
-    lista()
-    listaCompleta();
+    $(document).ready(function() {
+        lista()
+        listaCompleta()
+    })
+
 </script>

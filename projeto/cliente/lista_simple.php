@@ -12,7 +12,7 @@ if ($id == '') {
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <script>
-    const t2 = new DataTable('.t2', {});
+    let t2 = new DataTable('.t2', {});
 </script>
 <table class="table t2">
     <thead>

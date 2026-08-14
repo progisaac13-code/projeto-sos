@@ -8,7 +8,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 <script>
     const t1 = new DataTable('.t1', {});
 </script>
-<table class="table t1">
+<table class="table t1 table-striped-columns">
     <thead>
         <tr>
             <th>Nome</th>
