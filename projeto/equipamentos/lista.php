@@ -41,8 +41,8 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
         
                 ?>
                 <tr>
-                    <td><?= $nome . " - " . $modelo?></td>
-                    <td><?= $marca ?></td>
+                    <td><?= $nome . " - " . $marca?></td>
+                    <td><?= $modelo ?></td>
                     <td><?= $problema ?></td>
                     <td><?= $servico ?></td>
                     <td><?= $status ?></td>

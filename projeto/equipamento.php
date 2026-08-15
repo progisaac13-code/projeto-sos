@@ -1,3 +1,7 @@
+<?php
+require_once('../database/conexao.php');
+date_default_timezone_set('America/Sao_Paulo')
+?>
 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
     <input type="radio" class="btn-check" name="btnradio" id="newEquipamento" autocomplete="off">
     <label class="btn btn-outline-primary" for="newEquipamento">Novo Equipamento</label>
@@ -37,16 +41,17 @@
                 <div class="col-md-3">
                     <div class="form-floating">
                         <select name="id_cliente" id="id_cliente" class="form-select">
+                            <option value="0" selected>Selecione um Cliente</option>
                             <?php
-                                $query = $pdo->query("SELECT * FROM clientes;");
-                                $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                if (count($res) > 0) {
-                                    for ($i = 0; $i < count($res); $i++) {
-                                        ?>
-                                        <option value="<?= $res[$i]['id_cliente'] ?>"><?= $res[$i]['nome'] ?></option>
-                                        <?php
-                                    }
+                            $query = $pdo->query("SELECT * FROM clientes;");
+                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                            if (count($res) > 0) {
+                                for ($i = 0; $i < count($res); $i++) {
+                            ?>
+                                    <option value="<?= $res[$i]['id_cliente'] ?>"><?= $res[$i]['nome'] ?></option>
+                            <?php
                                 }
+                            }
                             ?>
                         </select>
                         <label for="id_cliente">Cliente</label>
@@ -62,16 +67,22 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <div class="form-floating">
-                                <input type="text" name="mao_obra" id="mao_obra" placeholder="Valor da Mão de Obra" class="form-control">
+                                <input type="text" name="mao_obra" id="mao_obra" placeholder="Valor da Mão de Obra" class="form-control" value="1.00">
                                 <label for="mao_obra">Valor da Mão de Obra</label>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-floating">
-                                <input type="text" name="valor_pecas" id="valor_pecas" placeholder="Valor das Peças" class="form-control">
+                                <input type="text" name="valor_pecas" id="valor_pecas" placeholder="Valor das Peças" class="form-control" value="1.00">
                                 <label for="valor_pecas">Valor das Peças</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" name="valor_total" id="valor_total" placeholder="Valor Total" class="form-control" value="1.00">
+                                <label for="valor_total">Valor Total</label>
                             </div>
                         </div>
                         <div class="col">
@@ -81,6 +92,53 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select name="status" id="status" class="form-select">
+                            <option value="Aguardando diagnóstico" selected>Aguardando diagnóstico</option>
+                            <option value="Em diagnóstico">Em diagnóstico</option>
+                            <option value="Aguardando aprovação">Aguardando aprovação</option>
+                            <option value="Aguardando peça">Aguardando peça</option>
+                            <option value="Em conserto">Em conserto</option>
+                            <option value="Em teste">Em teste</option>
+                            <option value="Pronto para entrega">Pronto para entrega</option>
+                            <option value="Entregue">Entregue</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                        <label for="status">Selecione um Status para o Equipamento</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="date" name="data_entrada" id="data_entrada" class="form-control" placeholder="Data Entrada" value="<?= date('Y-m-d') ?>">
+                                <label for="data_entrada">Data de Entrada</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="date" name="data_entrega" id="data_entrega" class="form-control" placeholder="Data Entrada" value="<?= date('Y-m-d') ?>">
+                                <label for="data_entrega">Data de Entrega</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <textarea name="obs" id="obs" placeholder="Observações..." class="form-control" style="height: 180px;"></textarea>
+                        <label for="obs">Observações...</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary py-3">Salvar Equipamento</button>
                 </div>
             </div>
         </form>
@@ -96,6 +154,7 @@
 
 <script>
     var pag = '<?= $_GET['pag']; ?>'
+
     function alternar() {
         let novoEQ = document.getElementById('newEquipamento')
         let location = document.getElementById('location')
@@ -160,12 +219,57 @@
         $.ajax({
             url: pag + '/lista.php',
             method: 'post',
-            data:{},
+            data: {},
             success: function(html) {
                 $('.table').html(html)
             }
         })
     }
+
+    $('form').submit(function(event) {
+        event.preventDefault();
+        var list = document.getElementById('list');
+        var nome = $('#tipo').val();
+        var modelo = $("#modelo").val()
+        var marca = $('#marca').val()
+        var id_clientes = $('#id_cliente').val()
+        var problema = $('#problema').val()
+        var mao_obra = $('#mao_obra').val()
+        var valor_pecas = $('#valor_pecas').val()
+        var servico = $('#servico').val()
+        var status = $("#status").val()
+        var data_entrega = $('#data_entrega').val();
+        var data_entrada = $('#data_entrada').val()
+        var obs = $('#obs').val()
+        var valor_total = $('#valor_total').val();
+        $.ajax({
+            url: pag + '/salvar.php',
+            method: 'post',
+            data: {
+                nome: nome,
+                marca: marca,
+                modelo: modelo,
+                id_cliente: id_clientes,
+                problema: problema,
+                mao_obra: mao_obra,
+                valor_pecas: valor_pecas,
+                servico: servico,
+                status: status,
+                data_entrega: data_entrega,
+                data_entrada: data_entrada,
+                obs: obs,
+                valor_total: valor_total
+            },
+            success: function(msg) {
+                alert(msg)
+                // if (!(list.checked)) {
+                //     list.checked = true;
+                // }
+                // alternar()
+                // lista()
+            }
+        })
+    })
 
     lista()
 </script>

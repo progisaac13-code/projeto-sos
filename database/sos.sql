@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13/08/2026 às 05:31
+-- Tempo de geração: 15/08/2026 às 04:03
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   `nome` varchar(80) DEFAULT NULL,
   `cpf` varchar(20) NOT NULL,
   `telefone` varchar(20) DEFAULT NULL,
@@ -40,8 +41,10 @@ CREATE TABLE `clientes` (
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nome`, `cpf`, `telefone`, `enredeco`, `equipamentos`) VALUES
-(1, 'Isaac Rocha', '70631871128', '62991402243', 'Av. Circular, 173', 0);
+INSERT INTO `clientes` (`id_cliente`, `foto`, `nome`, `cpf`, `telefone`, `enredeco`, `equipamentos`) VALUES
+(1, '6a7f8321330fd.jpeg', 'Isaac Rocha', '70631871128', '62991402243', 'Av. Circular, 173', 0),
+(2, NULL, 'Larissa Rocha', '70631866124', '62991402243', 'Av. Circular, 173', 0),
+(4, NULL, 'Larissy sem Rocha', '47202793172', '62991402243', 'Av. Circular, 173', 0);
 
 -- --------------------------------------------------------
 
@@ -50,12 +53,32 @@ INSERT INTO `clientes` (`id_cliente`, `nome`, `cpf`, `telefone`, `enredeco`, `eq
 --
 
 CREATE TABLE `equipamentos` (
-  `id_equipamento` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  `equipamento` varchar(100) NOT NULL,
-  `valor` varchar(10) NOT NULL,
-  `fabricacao` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_cliente` int(10) UNSIGNED NOT NULL,
+  `tipo_equipamento` varchar(100) NOT NULL,
+  `marca` varchar(100) DEFAULT NULL,
+  `modelo` varchar(150) DEFAULT NULL,
+  `problema_relatado` text DEFAULT NULL,
+  `servico` text DEFAULT NULL,
+  `valor_mao_obra` decimal(10,2) DEFAULT 0.00,
+  `valor_pecas` decimal(10,2) DEFAULT 0.00,
+  `valor_total` decimal(10,2) DEFAULT 0.00,
+  `status` enum('Aguardando diagnóstico','Em diagnóstico','Aguardando aprovação','Aguardando peça','Em conserto','Em teste','Pronto para entrega','Entregue','Cancelado') DEFAULT 'Aguardando diagnóstico',
+  `data_entrada` datetime DEFAULT current_timestamp(),
+  `data_previsao` datetime DEFAULT NULL,
+  `data_conclusao` datetime DEFAULT NULL,
+  `data_entrega` datetime DEFAULT NULL,
+  `observacoes` text DEFAULT NULL,
+  `criado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `equipamentos`
+--
+
+INSERT INTO `equipamentos` (`id`, `id_cliente`, `tipo_equipamento`, `marca`, `modelo`, `problema_relatado`, `servico`, `valor_mao_obra`, `valor_pecas`, `valor_total`, `status`, `data_entrada`, `data_previsao`, `data_conclusao`, `data_entrega`, `observacoes`, `criado_em`, `atualizado_em`) VALUES
+(1, 1, 'Notebook', '', '', 'sdsdvsfsd', 'ksmfkdkfmnk', 120.00, 20.00, 140.00, 'Aguardando aprovação', '2026-08-14 00:00:00', NULL, NULL, '2026-08-14 00:00:00', 'lamsdklçvnsljdfknblksdnflbksjdfn', '2026-08-14 21:25:54', '2026-08-14 21:25:54');
 
 -- --------------------------------------------------------
 
@@ -68,6 +91,17 @@ CREATE TABLE `imagens_equipamentos` (
   `nome` varchar(100) NOT NULL,
   `id_equipamento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `sos_config`
+--
+
+CREATE TABLE `sos_config` (
+  `id_config` int(11) NOT NULL,
+  `text_whatsapp` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -111,14 +145,19 @@ ALTER TABLE `clientes`
 -- Índices de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  ADD PRIMARY KEY (`id_equipamento`),
-  ADD KEY `id_cliente` (`id_cliente`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `imagens_equipamentos`
 --
 ALTER TABLE `imagens_equipamentos`
   ADD PRIMARY KEY (`id_img`);
+
+--
+-- Índices de tabela `sos_config`
+--
+ALTER TABLE `sos_config`
+  ADD PRIMARY KEY (`id_config`);
 
 --
 -- Índices de tabela `usuario`
@@ -134,13 +173,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  MODIFY `id_equipamento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `imagens_equipamentos`
@@ -149,20 +188,16 @@ ALTER TABLE `imagens_equipamentos`
   MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `sos_config`
+--
+ALTER TABLE `sos_config`
+  MODIFY `id_config` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `equipamentos`
---
-ALTER TABLE `equipamentos`
-  ADD CONSTRAINT `equipamentos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
