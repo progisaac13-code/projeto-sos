@@ -263,11 +263,7 @@ date_default_timezone_set('America/Sao_Paulo')
                 valor_total: valor_total
             },
             success: function(msg) {
-                if (!(list.checked)) {
-                    list.checked = true;
-                }
-                alternar()
-                lista()
+                window.location.reload();
             }
         })
     })
