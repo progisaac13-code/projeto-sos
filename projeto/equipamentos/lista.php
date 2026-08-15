@@ -41,6 +41,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 $data_entrega = $res[$i]['data_entrega'];
                 $obs = $res[$i]['observacoes'];
 
+
                 $data_entrada = explode(' ', $data_entrada);
                 $data_entrega = explode(' ', $data_entrega);
         
@@ -80,6 +81,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                         $background = '#000';
                         break;
                 }
+
                 ?>
                 <tr>
                     <td><?= $nome . " - " . $marca?></td>
@@ -90,7 +92,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     <td style="background-color: <?= $background ?>;"><?= $status ?></td>
                     <td>
                         <a href="" onclick="excluir(<?= $id_equipamento ?>)" title="Excluir Equipamento"><i class="fa-solid fa-trash"></i></a>
-                        <a href="" onclick="editar(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $marca ?>', '<?= $modelo ?>', '<?= $problema ?>', '<?= $id_cliente ?>', '<?= $servico ?>', '<?= $status ?>')"><i class="fa-solid fa-file-pen"></i></a>
+                        <a href="" onclick="editar(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $marca ?>', '<?= $modelo ?>', '<?= $problema ?>', '<?= $id_cliente ?>', '<?= $servico ?>', '<?= $status ?>', '<?= $mao_obra ?>', <?= $valor_pecas ?>, '<?= $valor_total ?>', '<?= $data_entrega[0] ?>', '<?= $data_entrada[0] ?>', '<?= $obs ?>')"><i class="fa-solid fa-file-pen"></i></a>
                         <i class="fa-solid fa-ellipsis"></i>
                         <i class="fa-solid fa-signal"></i>
                     </td>

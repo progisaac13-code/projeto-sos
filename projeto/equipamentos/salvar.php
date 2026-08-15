@@ -1,7 +1,7 @@
-
 <?php
 require_once "../../database/conexao.php";
 
+$id = $_POST['íd'];
 $nome = $_POST['nome'];
 $modelo = $_POST['modelo'];
 $marca = $_POST['marca'];
@@ -16,17 +16,19 @@ $data_entrada  = $_POST['data_entrada'];
 $obs = $_POST['obs'];
 $valor_total = $_POST['valor_total'];
 
-if ($data_entrada == '' || $data_entrega == '') {
-    echo "Selecione um data de Entrada/Entrega.";
-    exit;
+if ($id == '') {
+    if ($data_entrada == '' || $data_entrega == '') {
+        echo "Selecione um data de Entrada/Entrega.";
+        exit;
+    }
+
+    if ($id_cliente == 0) {
+        echo "Selecione um Cliente.";
+        exit;
+    }
+
+    $pdo->query("INSERT INTO equipamentos (tipo_equipamento, marca, modelo, problema_relatado, id_cliente, valor_mao_obra, valor_pecas, valor_total, status, servico, data_entrada, data_entrega, observacoes) VALUES ('$nome', '$marca', '$modelo', '$problema', '$id_cliente', '$mao_obra', '$valor_pecas', '$valor_total', '$status','$servico', '$data_entrada', '$data_entrega', '$obs')");
+} else {
+    $pdo->query("UPDATE equipamentos (tipo_equipamento, marca, modelo, problema_relatado, id_cliente, valor_mao_obra, valor_pecas, valor_total, status, servico, data_entrada, data_entrega, observacoes) VALUES ('$nome', '$marca', '$modelo', '$problema', '$id_cliente', '$mao_obra', '$valor_pecas', '$valor_total', '$status','$servico', '$data_entrada', '$data_entrega', '$obs') WHERE id_equipamento = '$id'");
 }
-
-if ($id_cliente == 0) {
-    echo "Selecione um Cliente.";
-    exit;
-}
-
-$pdo->query("INSERT INTO equipamentos (tipo_equipamento, marca, modelo, problema_relatado, id_cliente, valor_mao_obra, valor_pecas, valor_total, status, servico, data_entrada, data_entrega, observacoes) VALUES ('$nome', '$marca', '$modelo', '$problema', '$id_cliente', '$mao_obra', '$valor_pecas', '$valor_total', '$status','$servico', '$data_entrada', '$data_entrega', '$obs')");
-
 echo "Salvo com Sucesso";
-?>

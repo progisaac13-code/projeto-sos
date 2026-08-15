@@ -17,7 +17,7 @@ date_default_timezone_set('America/Sao_Paulo')
 <div id="novoEquipamento" class="d-none">
     <div class="p-4">
         <h3>Preenchar corretamente os Dados Abaixo!</h3>
-        <p>Vincule o Equipamento ao Cliente Responsável por Ele</p>
+        <p class="p_add">Vincule o Equipamento ao Cliente Responsável por Ele</p>
         <form method="post">
             <div class="row">
                 <div class="col-md-3">
@@ -138,7 +138,8 @@ date_default_timezone_set('America/Sao_Paulo')
             </div>
             <div class="row mt-3">
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary py-3">Salvar Equipamento</button>
+                    <input type="text" name="id_equipamento" id="id_equipamento">
+                    <button type="submit" class="btn btn-primary py-3 btn-form">Salvar Equipamento</button>
                 </div>
             </div>
         </form>
@@ -228,6 +229,7 @@ date_default_timezone_set('America/Sao_Paulo')
 
     $('form').submit(function(event) {
         var list = document.getElementById('list');
+        var id = $('#id_equipamento').val()
         var nome = $('#tipo').val();
         var modelo = $("#modelo").val()
         var marca = $('#marca').val()
@@ -245,6 +247,7 @@ date_default_timezone_set('America/Sao_Paulo')
             url: pag + '/salvar.php',
             method: 'post',
             data: {
+                id: id,
                 nome: nome,
                 marca: marca,
                 modelo: modelo,
@@ -286,7 +289,7 @@ date_default_timezone_set('America/Sao_Paulo')
     }
 
 
-    function editar(id, nome, marca, modelo, problema, id_cliente, servico, status) {
+    function editar(id, nome, marca, modelo, problema, id_cliente, servico, status, mao_obra, valor_pecas, valor_total, entrega, entrada, obs) {
         event.preventDefault();
         var New = document.getElementById('newEquipamento')
         if (!(New.checked)) {
@@ -295,6 +298,24 @@ date_default_timezone_set('America/Sao_Paulo')
         $('.newEqText').text('Editar Equipamento')
         alternar()
 
+        $('#id_equipamento').val(id);
+        $('#tipo').val(nome);
+        $("#modelo").val(modelo)
+        $('#marca').val(marca)
+        $('#id_cliente').val(id_cliente)
+        $('#problema').val(problema)
+        $('#mao_obra').val(mao_obra)
+        $('#valor_pecas').val(valor_pecas)
+        $('#servico').val(servico)
+        $("#status").val(status)
+        $('#data_entrega').val(entrega);
+        $('#data_entrada').val(entrada)
+        $('#obs').val(obs)
+        $('#valor_total').val(valor_total);
+
+        $('.p_add').text("Edite os dados do equipamento conforme solicitado.")
+
+        $('.btn-form').text('Editar Equipamento')
     }
 
     lista()
