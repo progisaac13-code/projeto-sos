@@ -34,7 +34,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 $valor_pecas = $res[$i]['valor_pecas'];
                 $valor_total = $res[$i]['valor_total'];
                 $status = $res[$i]['status'];
-        
+
                 $data_entrada = $res[$i]['data_entrada'];
                 $data_previsao = $res[$i]['data_previsao'];
                 $data_conclusao = $res[$i]['data_conclusao'];
@@ -44,7 +44,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 $entrada = explode(' ', $data_entrada);
                 $entrega = explode(' ', $data_entrega);
-        
+
                 $query_cli = $pdo->query("SELECT * FROM clientes WHERE id_cliente = '$id_cliente'");
                 $res_cli = $query_cli->fetchAll(PDO::FETCH_ASSOC);
                 $cliente = $res_cli[0]['nome'];
@@ -82,37 +82,52 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                         break;
                 }
 
-                ?>
+        ?>
                 <tr>
-                    <td><?= $nome . " - " . $marca?></td>
+                    <td><?= $nome . " - " . $marca ?></td>
                     <td><?= $modelo ?></td>
                     <td><?= $problema ?></td>
                     <td><?= $cliente ?></td>
                     <td><?= $servico ?></td>
                     <td style="background-color: <?= $background ?>;"><?= $status ?></td>
-                    <td>
+                    <td class="d-flex flex-wrap gap-1">
                         <a href="" onclick="excluir(<?= $id_equipamento ?>)" title="Excluir Equipamento"><i class="fa-solid fa-trash"></i></a>
                         <a href="" onclick="editar(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $marca ?>', '<?= $modelo ?>', '<?= $problema ?>', '<?= $id_cliente ?>', '<?= $servico ?>', '<?= $status ?>', '<?= $mao_obra ?>', <?= $valor_pecas ?>, '<?= $valor_total ?>', '<?= $entrega[0] ?>', '<?= $entrada[0] ?>', '<?= $obs ?>')"><i class="fa-solid fa-file-pen"></i></a>
                         <i class="fa-solid fa-ellipsis"></i>
-                        <i class="fa-solid fa-signal"></i>
+                        <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Atualizar Status">
+                                <i class="fa-solid fa-signal"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Aguardando diagnóstico')" ><a style="border-left: 4px solid #64748B;" class="dropdown-item" href="#">Aguardando diagnóstico</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Em diagnóstico')" ><a style="border-left: 4px solid #3B82F6;" class="dropdown-item" href="#">Em diagnóstico</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Aguardando aprovação')" ><a style="border-left: 4px solid #F59E0B;" class="dropdown-item" href="#">Aguardando aprovação</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Aguardando peça')" ><a style="border-left: 4px solid #F97316;" class="dropdown-item" href="#">Aguardando peça</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Em conserto')" ><a style="border-left: 4px solid #8B5CF6;" class="dropdown-item" href="#">Em conserto</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Em teste')" ><a style="border-left: 4px solid #06B6D4;" class="dropdown-item" href="#">Em teste</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Pronto para entrega')" ><a style="border-left: 4px solid #22C55E;" class="dropdown-item" href="#">Pronto para entrega</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Entregue')" ><a style="border-left: 4px solid #15803D;" class="dropdown-item" href="#">Entregue</a></li>
+                                <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Cancelado')" ><a style="border-left: 4px solid #EF4444;" class="dropdown-item" href="#">Cancelado</a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
-                <?php
+            <?php
             }
         } else {
             ?>
-                <tr>
-                    <td>
-                        Sem Dados!
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            <?php
+            <tr>
+                <td>
+                    Sem Dados!
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        <?php
         }
         ?>
     </tbody>

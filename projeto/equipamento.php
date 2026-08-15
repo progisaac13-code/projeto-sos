@@ -138,7 +138,7 @@ date_default_timezone_set('America/Sao_Paulo')
             </div>
             <div class="row mt-3">
                 <div class="col-md-4">
-                    <input type="text" name="id_equipamento" id="id_equipamento">
+                    <input type="hidden" name="id_equipamento" id="id_equipamento">
                     <button type="submit" class="btn btn-primary py-3 btn-form">Salvar Equipamento</button>
                 </div>
             </div>
@@ -146,7 +146,7 @@ date_default_timezone_set('America/Sao_Paulo')
     </div>
 </div>
 <div id="listView">
-    <div class="p-4">
+    <div class="py-4">
         <h3>Lista de Equipamento</h3>
         <p>Faça suas alterações!</p>
         <div class="table"></div>
@@ -312,6 +312,21 @@ date_default_timezone_set('America/Sao_Paulo')
         $('.p_add').text("Edite os dados do equipamento conforme solicitado.")
 
         $('.btn-form').text('Editar Equipamento')
+    }
+
+    function enviar_status(id, status) {
+        event.preventDefault();
+        $.ajax({
+            url: pag + '/status.php',
+            method: 'post',
+            data: {
+                id: id,
+                status: status
+            },
+            success: function(msg) {
+                lista()
+            }
+        })
     }
 
     lista()
