@@ -4,7 +4,7 @@ date_default_timezone_set('America/Sao_Paulo')
 ?>
 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
     <input type="radio" class="btn-check" name="btnradio" id="newEquipamento" autocomplete="off">
-    <label class="btn btn-outline-primary" for="newEquipamento">Novo Equipamento</label>
+    <label class="btn btn-outline-primary newEqText" for="newEquipamento">Novo Equipamento</label>
 
     <input type="radio" class="btn-check" name="btnradio" id="list" autocomplete="off" checked>
     <label class="btn btn-outline-primary" for="list">Lista de Equipamento</label>
@@ -227,7 +227,6 @@ date_default_timezone_set('America/Sao_Paulo')
     }
 
     $('form').submit(function(event) {
-        event.preventDefault();
         var list = document.getElementById('list');
         var nome = $('#tipo').val();
         var modelo = $("#modelo").val()
@@ -261,15 +260,42 @@ date_default_timezone_set('America/Sao_Paulo')
                 valor_total: valor_total
             },
             success: function(msg) {
-                alert(msg)
-                // if (!(list.checked)) {
-                //     list.checked = true;
-                // }
-                // alternar()
-                // lista()
+                if (!(list.checked)) {
+                    list.checked = true;
+                }
+                alternar()
+                lista()
             }
         })
     })
+
+    function excluir(id) {
+        var resp = confirm('Tem certeza que deseja excluir esse equipamento?')
+        if (resp) {
+            $.ajax({
+                url: pag + '/excluir.php',
+                method: 'post',
+                data: {
+                    id: id
+                },
+                success: function(msg) {
+                    window.location.reload();
+                }
+            })
+        }
+    }
+
+
+    function editar(id, nome, marca, modelo, problema, id_cliente, servico, status) {
+        event.preventDefault();
+        var New = document.getElementById('newEquipamento')
+        if (!(New.checked)) {
+            New.checked = true;
+        }
+        $('.newEqText').text('Editar Equipamento')
+        alternar()
+
+    }
 
     lista()
 </script>

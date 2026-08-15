@@ -35,7 +35,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 $cpf = preg_replace('/[^0-9]/', '', $cpf);
                 $telefone = preg_replace('/[^0-9]/', '', $telefone);
 
-                $query_eq = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$_SESSION[id]'");
+                $query_eq = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id'");
                 $res_eq = $query_eq->fetchAll(PDO::FETCH_ASSOC);
                 $tot_eq = count($res_eq);
 

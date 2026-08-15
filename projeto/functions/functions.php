@@ -55,3 +55,12 @@ function validar_cpf($cpf) {
 
     return true;
 }
+function formatarData($data) {
+    if (empty($data)) {
+        return '';
+    }
+
+    $data = DateTime::createFromFormat('Y-m-d', $data);
+
+    return $data ? $data->format('d/m/Y') : '';
+}

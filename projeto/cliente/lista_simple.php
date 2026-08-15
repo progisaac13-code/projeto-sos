@@ -28,6 +28,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
         <?php
         if (count($res) > 0) {
             for ($i = 0; $i < count($res); $i++) {
+                $id = $res[$i]['id_cliente'];
                 $nome = $res[$i]['nome'];
                 $cpf = $res[$i]['cpf'];
                 $telefone = $res[$i]['telefone'];
@@ -35,7 +36,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 $cpf = preg_replace('/[^0-9]/', '', $cpf);
 
-                $query_eq = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$_SESSION[id]'");
+                $query_eq = $pdo->query("SELECT * FROM equipamentos WHERE id_cliente = '$id'");
                 $res_eq = $query_eq->fetchAll(PDO::FETCH_ASSOC);
                 $tot_eq = count($res_eq);
 
