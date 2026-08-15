@@ -82,6 +82,9 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                         break;
                 }
 
+                $mao_format = number_format($mao_obra, 2, ',');
+                $pecas_format = number_format($valor_pecas, 2, ',');
+
         ?>
                 <tr>
                     <td><?= $nome . " - " . $marca ?></td>
@@ -93,7 +96,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     <td class="d-flex flex-wrap gap-1">
                         <a href="" onclick="excluir(<?= $id_equipamento ?>)" title="Excluir Equipamento"><i class="fa-solid fa-trash"></i></a>
                         <a href="" onclick="editar(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $marca ?>', '<?= $modelo ?>', '<?= $problema ?>', '<?= $id_cliente ?>', '<?= $servico ?>', '<?= $status ?>', '<?= $mao_obra ?>', <?= $valor_pecas ?>, '<?= $valor_total ?>', '<?= $entrega[0] ?>', '<?= $entrada[0] ?>', '<?= $obs ?>')"><i class="fa-solid fa-file-pen"></i></a>
-                        <i class="fa-solid fa-ellipsis"></i>
+                        <a href="" onclick="more(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $modelo ?>', '<?= $marca ?>', '<?= $cliente ?>', '<?= $mao_format ?>', '<?= $pecas_format ?>')" title="Mais Informações"><i class="fa-solid fa-ellipsis"></i></a>
                         <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Atualizar Status">
                                 <i class="fa-solid fa-signal"></i>

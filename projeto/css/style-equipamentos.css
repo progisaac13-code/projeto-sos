@@ -45,3 +45,11 @@ td a {
     color: black;
     font-size: 17px;
 }
+
+#moreView p {
+    font-size: 16px;
+}
+
+#moreView p span {
+    font-size: 18px;
+}

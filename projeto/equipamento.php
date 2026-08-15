@@ -9,8 +9,8 @@ date_default_timezone_set('America/Sao_Paulo')
     <input type="radio" class="btn-check" name="btnradio" id="list" autocomplete="off" checked>
     <label class="btn btn-outline-primary" for="list">Lista de Equipamento</label>
 
-    <input type="radio" class="btn-check" name="btnradio" id="location" autocomplete="off">
-    <label class="btn btn-outline-primary" for="location">Maps/Localização</label>
+    <input type="radio" class="btn-check" name="btnradio" id="more" autocomplete="off">
+    <label class="btn btn-outline-primary" for="more">Mais Informações</label>
 
     <input type="radio" class="btn-check" name="btnradio" id="editClient" autocomplete="off">
 </div>
@@ -152,53 +152,63 @@ date_default_timezone_set('America/Sao_Paulo')
         <div class="table"></div>
     </div>
 </div>
+<div id="moreView" class="d-none">
+    <div class="py-4 begin_info">
+        <h3>Visualize mais dados do seu equipamento</h3>
+        <p>Clique em um Equipamento da Lista de Equipamento para visualizar os todos os Dados!</p>
+    </div>
+    <div class="more_info d-none py-4">
+        <h2 id="title_eq"></h2>
+        <div class="row">
+            <div class="col-md-2">
+                <p>Modelo: <strong><span id="modelo_text"></span></strong></p>
+            </div>
+            <div class="col-md-2">
+                <p>Marca: <strong><span id="marca_text"></span></strong></p>
+            </div>
+            <div class="col-md-3">
+                <p>Cliente Responsável: <strong><span id="cliente"></span></strong></p>
+            </div>
+            <div class="col-md-2">
+                <p>Mão de Obra: <strong><span id="mao_obra_text"></span></strong></p>
+            </div>
+            <div class="col-md-2">
+                <p>Valor Peças: <strong><span id="valor_pecas_text"></span></strong></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var pag = '<?= $_GET['pag']; ?>'
 
     function alternar() {
         let novoEQ = document.getElementById('newEquipamento')
-        let location = document.getElementById('location')
-        let edit = document.getElementById('editClient')
+        let more = document.getElementById('more')
         let list = document.getElementById('list')
         if (novoEQ.checked) {
             $('#novoEquipamento').removeClass();
-            $('#locationView').removeClass();
-            $('#edit').removeClass();
+            $('#moreView').removeClass();
             $("#listView").removeClass();
             $('#novoEquipamento').addClass('d-block')
-            $('#locationView').addClass('d-none');
-            $('#edit').addClass('d-none')
+            $('#moreView').addClass('d-none');
             $('#listView').addClass('d-none');
         }
-        if (location.checked) {
-            $('#novoCliente').removeClass();
-            $('#locationView').removeClass();
+        if (more.checked) {
+            $('#novoEquipamento').removeClass();
+            $('#moreView').removeClass();
             $('#edit').removeClass();
             $("#listView").removeClass();
-            $('#novoCliente').addClass('d-none')
-            $('#locationView').addClass('d-block');
-            $('#edit').addClass('d-none')
-            $('#listView').addClass('d-none');
-        }
-        if (edit.checked) {
-            $('#novoCliente').removeClass();
-            $('#locationView').removeClass();
-            $('#edit').removeClass();
-            $("#listView").removeClass();
-            $('#novoCliente').addClass('d-none')
-            $('#locationView').addClass('d-none');
-            $('#edit').addClass('d-block')
+            $('#novoEquipamento').addClass('d-none')
+            $('#moreView').addClass('d-block');
             $('#listView').addClass('d-none');
         }
         if (list.checked) {
             $('#novoEquipamento').removeClass();
-            $('#locationView').removeClass();
-            $('#edit').removeClass();
+            $('#moreView').removeClass();
             $("#listView").removeClass();
             $('#novoEquipamento').addClass('d-none')
-            $('#locationView').addClass('d-none');
-            $('#edit').addClass('d-none')
+            $('#moreView').addClass('d-none');
             $('#listView').addClass('d-block');
         }
     }
@@ -206,10 +216,7 @@ date_default_timezone_set('America/Sao_Paulo')
     $("#newEquipamento").on('change', function() {
         alternar();
     })
-    $('#location').on('change', function() {
-        alternar();
-    })
-    $('#editClient').on('change', function() {
+    $('#more').on('change', function() {
         alternar();
     })
     $('#list').on('change', function() {
@@ -324,9 +331,28 @@ date_default_timezone_set('America/Sao_Paulo')
                 status: status
             },
             success: function(msg) {
-                lista()
+                window.location.reload()
             }
         })
+    }
+
+    function more(id, nome, modelo, marca, cliente, mao_obra, valor_pecas) {
+        event.preventDefault();
+        var more = document.getElementById('more')
+        if (!(more.checked)) {
+            more.checked = true;
+        }
+        alternar()
+
+        $('.begin_info').addClass('d-none');
+        $('.more_info').removeClass("d-none");
+        
+        $('#title_eq').text('Equipamento: ' + nome);
+        $('#modelo_text').text(modelo)
+        $('#marca_text').text(marca)
+        $('#cliente').text(cliente)
+        $('#mao_obra_text').text(mao_obra)
+        $('#valor_pecas_text').text(valor_pecas)
     }
 
     lista()
