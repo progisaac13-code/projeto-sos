@@ -30,7 +30,6 @@ body {
 }
 
 #preview img {
-
     width: 150px;
     margin: 10px;
     border-radius: 8px;
@@ -47,6 +46,8 @@ td a {
 }
 
 #moreView p {
+    font-family: 'Montserrat';
+    font-style: italic;
     font-size: 16px;
 }
 

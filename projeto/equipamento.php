@@ -169,11 +169,27 @@ date_default_timezone_set('America/Sao_Paulo')
             <div class="col-md-3">
                 <p>Cliente Responsável: <strong><span id="cliente"></span></strong></p>
             </div>
+            <div class="col-md-4">
+                <p>Status: <strong><span id="status_text"></span></strong></p>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 <p>Mão de Obra: <strong><span id="mao_obra_text"></span></strong></p>
             </div>
             <div class="col-md-2">
                 <p>Valor Peças: <strong><span id="valor_pecas_text"></span></strong></p>
+            </div>
+            <div class="col-md-2">
+                <p>Valor Total: <strong><span id="valor_text"></span></strong></p>
+            </div>
+            <div class="col-md-6">
+                Foto
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <p>Problema: <strong><span id="problema_text"></span></strong></p>
             </div>
         </div>
     </div>
@@ -336,7 +352,7 @@ date_default_timezone_set('America/Sao_Paulo')
         })
     }
 
-    function more(id, nome, modelo, marca, cliente, mao_obra, valor_pecas) {
+    function more(id, nome, modelo, marca, cliente, mao_obra, valor_pecas, status, valor_total, problema) {
         event.preventDefault();
         var more = document.getElementById('more')
         if (!(more.checked)) {
@@ -353,6 +369,9 @@ date_default_timezone_set('America/Sao_Paulo')
         $('#cliente').text(cliente)
         $('#mao_obra_text').text(mao_obra)
         $('#valor_pecas_text').text(valor_pecas)
+        $('#status_text').text(status)
+        $('#valor_text').text(valor_total)
+        $('#problema_text').text(problema)
     }
 
     lista()
