@@ -203,6 +203,10 @@ date_default_timezone_set('America/Sao_Paulo')
                     <textarea name="obs" id="v_obs" placeholder="Observações..." class="form-control" style="height: 180px;"></textarea>
                     <label for="obs">Observações...</label>
                 </div>
+                <input type="text" id="id_equipamentoinfo">
+            </div>
+            <div class="col-md-6">
+                <div id="preview_img"></div>
             </div>
         </div>
     </div>
@@ -408,6 +412,7 @@ date_default_timezone_set('America/Sao_Paulo')
         $('.begin_info').addClass('d-none');
         $('.more_info').removeClass("d-none");
 
+        $('#id_equipamentoinfo').val(id);
         $('#title_eq').text('Equipamento: ' + nome);
         $('#v_mao_obra').val(mao_obra)
         $('#v_valor_pecas').val(valor_pecas)
@@ -416,6 +421,21 @@ date_default_timezone_set('America/Sao_Paulo')
         $("#v_data_entrega").val(data_entrega)
         $('#v_data_entrada').val(data_entrada)
         $('#v_obs').val(obs)
+
+        carregar_imagens(id);
+    }
+
+    function carregar_imagens(id) {
+        $.ajax({
+            url: pag + '/fotos.php',
+            method: 'post',
+            data: {
+                id: id
+            },
+            success: function(html) {
+                $('#preview_img').html(html);
+            }
+        })
     }
 
     function upload(id_equipamento) {
@@ -458,7 +478,7 @@ date_default_timezone_set('America/Sao_Paulo')
     });
 
     function enviar(files) {
-        var id_equipamento = $('#ideq_upload').val();
+        var id_equipamento = $('#id_equipamentoimg').val();
         [...files].forEach(file => {
 
             if (!file.type.startsWith("image/")) {
@@ -481,9 +501,7 @@ date_default_timezone_set('America/Sao_Paulo')
                 })
                 .then(r => r.text())
                 .then(msg => {
-
-                    lst()
-
+                    alert('Imagem enviada com sucesso');
                 });
 
             // Preview
@@ -505,6 +523,7 @@ date_default_timezone_set('America/Sao_Paulo')
 
     }
 
+    
 
     lista()
 </script>
