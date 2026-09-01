@@ -160,124 +160,83 @@ date_default_timezone_set('America/Sao_Paulo')
     <div class="more_info d-none py-4">
         <h2 id="title_eq"></h2>
         <div class="row">
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <input type="text" name="modelo" id="modelo" placeholder="Modelo do Equipamento..." class="form-control">
-                    <label for="modelo">Modelo do Equipamento</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <input type="text" name="marca" id="marca" placeholder="Marca do Equipamento..." class="form-control">
-                    <label for="marca">Marca do Equipamento</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <select name="id_cliente" id="id_cliente" class="form-select">
-                        <option value="0" selected>Selecione um Cliente</option>
-                        <?php
-                        $query = $pdo->query("SELECT * FROM clientes;");
-                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($res) > 0) {
-                            for ($i = 0; $i < count($res); $i++) {
-                        ?>
-                                <option value="<?= $res[$i]['id_cliente'] ?>"><?= $res[$i]['nome'] ?></option>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </select>
-                    <label for="id_cliente">Cliente</label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
             <div class="col-md-6">
-                <div class="form-floating">
-                    <textarea name="problema" id="problema" class="form-control" style="height: 130px;" placeholder="Problema Relatado"></textarea>
-                    <label for="problema">Problema Relatado</label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <div class="form-floating">
-                            <input type="text" name="mao_obra" id="mao_obra" placeholder="Valor da Mão de Obra" class="form-control" value="1.00">
-                            <label for="mao_obra">Valor da Mão de Obra</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-floating">
-                            <input type="text" name="valor_pecas" id="valor_pecas" placeholder="Valor das Peças" class="form-control" value="1.00">
-                            <label for="valor_pecas">Valor das Peças</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-floating">
-                            <input type="text" name="valor_total" id="valor_total" placeholder="Valor Total" class="form-control" value="1.00">
-                            <label for="valor_total">Valor Total</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="text" name="servico" id="servico" class="form-control" placeholder="Serviço Prestado">
-                            <label for="servico">Serviço Prestado</label>
-                        </div>
+                <div class="col mb-3">
+                    <div class="form-floating">
+                        <input type="text" name="mao_obra" id="v_mao_obra" placeholder="Valor da Mão de Obra" class="form-control" value="1.00">
+                        <label for="mao_obra">Valor da Mão de Obra</label>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <select name="status" id="status" class="form-select">
-                        <option value="Aguardando diagnóstico" selected>Aguardando diagnóstico</option>
-                        <option value="Em diagnóstico">Em diagnóstico</option>
-                        <option value="Aguardando aprovação">Aguardando aprovação</option>
-                        <option value="Aguardando peça">Aguardando peça</option>
-                        <option value="Em conserto">Em conserto</option>
-                        <option value="Em teste">Em teste</option>
-                        <option value="Pronto para entrega">Pronto para entrega</option>
-                        <option value="Entregue">Entregue</option>
-                        <option value="Cancelado">Cancelado</option>
-                    </select>
-                    <label for="status">Selecione um Status para o Equipamento</label>
+                <div class="col mb-3">
+                    <div class="form-floating">
+                        <input type="text" name="valor_pecas" id="v_valor_pecas" placeholder="Valor das Peças" class="form-control" value="1.00">
+                        <label for="valor_pecas">Valor das Peças</label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
+                <div class="col mb-3">
+                    <div class="form-floating">
+                        <input type="text" name="valor_total" id="v_valor_total" placeholder="Valor Total" class="form-control" value="1.00">
+                        <label for="valor_total">Valor Total</label>
+                    </div>
+                </div>
+                <div class="col mb-3">
+                    <div class="form-floating">
+                        <input type="text" name="servico" id="v_servico" class="form-control" placeholder="Serviço Prestado">
+                        <label for="servico">Serviço Prestado</label>
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="date" name="data_entrada" id="data_entrada" class="form-control" placeholder="Data Entrada" value="<?= date('Y-m-d') ?>">
+                            <input type="date" name="data_entrada" id="v_data_entrada" class="form-control" placeholder="Data Entrada" value="<?= date('Y-m-d') ?>">
                             <label for="data_entrada">Data de Entrada</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="date" name="data_entrega" id="data_entrega" class="form-control" placeholder="Data Entrada" value="<?= date('Y-m-d') ?>">
+                            <input type="date" name="data_entrega" id="v_data_entrega" class="form-control" placeholder="Data Entrada" value="<?= date('Y-m-d') ?>">
                             <label for="data_entrega">Data de Entrega</label>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12">
                 <div class="form-floating">
-                    <textarea name="obs" id="obs" placeholder="Observações..." class="form-control" style="height: 180px;"></textarea>
+                    <textarea name="obs" id="v_obs" placeholder="Observações..." class="form-control" style="height: 180px;"></textarea>
                     <label for="obs">Observações...</label>
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <input type="hidden" name="id_equipamento" id="id_equipamento">
-                <button type="submit" class="btn btn-primary py-3 btn-form">Salvar Equipamento</button>
+    </div>
+</div>
+
+<div class="modal fade" id="modalImagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Inserir Imagens</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="upload_img">
+                    <div id="dropArea">
+                        Arraste uma imagem aqui ou clique
+                    </div>
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                        hidden>
+
+                    <div id="preview"></div>
+                    <input type="hidden" id="ideq_upload">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="id_equipamentoimg" val="">
+                <button type="button" class="btn btn-primary">Salvar Imagens</button>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <script>
@@ -437,7 +396,7 @@ date_default_timezone_set('America/Sao_Paulo')
         })
     }
 
-    function more(id, nome, modelo, marca, cliente, mao_obra, valor_pecas, status, valor_total, problema_rel, servico) {
+    function more(id, nome, modelo, marca, cliente, mao_obra, valor_pecas, status, valor_total, problema_rel, servico, data_entrega, data_entrada, obs) {
         event.preventDefault();
         var more = document.getElementById('more')
         if (!(more.checked)) {
@@ -450,16 +409,102 @@ date_default_timezone_set('America/Sao_Paulo')
         $('.more_info').removeClass("d-none");
 
         $('#title_eq').text('Equipamento: ' + nome);
-        $('#modelo_text').text(modelo)
-        $('#marca_text').text(marca)
-        $('#cliente').text(cliente)
-        $('#mao_obra_text').text(mao_obra)
-        $('#valor_pecas_text').text(valor_pecas)
-        $('#status_text').text(status)
-        $('#valor_text').text(valor_total)
-        $('#problema_text').text(problema_rel)
-        $("#servico_prestado").text(servico)
+        $('#v_mao_obra').val(mao_obra)
+        $('#v_valor_pecas').val(valor_pecas)
+        $('#v_valor_total').val(valor_total)
+        $("#v_servico").val(servico)
+        $("#v_data_entrega").val(data_entrega)
+        $('#v_data_entrada').val(data_entrada)
+        $('#v_obs').val(obs)
     }
+
+    function upload(id_equipamento) {
+        $('#modalImagem').modal('show')
+        $('#id_equipamentoimg').val(id_equipamento)
+    }
+
+    const dropArea = document.getElementById("dropArea");
+    const fileInput = document.getElementById("fileInput");
+
+    dropArea.onclick = () => fileInput.click();
+
+    fileInput.onchange = () => {
+
+        enviar(fileInput.files);
+
+    }
+
+    dropArea.addEventListener("dragover", (e) => {
+
+        e.preventDefault();
+        dropArea.classList.add("hover");
+
+    });
+
+    dropArea.addEventListener("dragleave", () => {
+
+        dropArea.classList.remove("hover");
+
+    });
+
+    dropArea.addEventListener("drop", (e) => {
+
+        e.preventDefault();
+
+        dropArea.classList.remove("hover");
+
+        enviar(e.dataTransfer.files);
+
+    });
+
+    function enviar(files) {
+        var id_equipamento = $('#ideq_upload').val();
+        [...files].forEach(file => {
+
+            if (!file.type.startsWith("image/")) {
+
+                alert("Arquivo inválido");
+                return;
+
+            }
+
+            let form = new FormData();
+
+            form.append("foto", file);
+            form.append("id_equipamento", id_equipamento)
+
+            fetch("equipamentos/imagens.php", {
+
+                    method: "POST",
+                    body: form
+
+                })
+                .then(r => r.text())
+                .then(msg => {
+
+                    lst()
+
+                });
+
+            // Preview
+
+            let reader = new FileReader();
+
+            reader.onload = function(e) {
+
+                let img = document.createElement("img");
+                img.src = e.target.result;
+
+                document.getElementById("preview").appendChild(img);
+
+            }
+
+            reader.readAsDataURL(file);
+
+        });
+
+    }
+
 
     lista()
 </script>

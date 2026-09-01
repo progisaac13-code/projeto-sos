@@ -97,7 +97,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     <td class="d-flex flex-wrap gap-1">
                         <a href="" onclick="excluir(<?= $id_equipamento ?>)" title="Excluir Equipamento"><i class="fa-solid fa-trash"></i></a>
                         <a href="" onclick="editar(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $marca ?>', '<?= $modelo ?>', '<?= $problema ?>', '<?= $id_cliente ?>', '<?= $servico ?>', '<?= $status ?>', '<?= $mao_obra ?>', <?= $valor_pecas ?>, '<?= $valor_total ?>', '<?= $entrega[0] ?>', '<?= $entrada[0] ?>', '<?= $obs ?>')"><i class="fa-solid fa-file-pen"></i></a>
-                        <a href="" onclick="more(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $modelo ?>', '<?= $marca ?>', '<?= $cliente ?>', '<?= $mao_format ?>', '<?= $pecas_format ?>', '<?= $status ?>', '<?= $valor_total_format ?>', '<?= $problema ?>', '<?= $servico ?>')" title="Mais Informações"><i class="fa-solid fa-ellipsis"></i></a>
+                        <a href="" onclick="more(<?= $id_equipamento ?>, '<?= $nome ?>', '<?= $modelo ?>', '<?= $marca ?>', '<?= $id_cliente ?>', '<?= $mao_format ?>', '<?= $pecas_format ?>', '<?= $status ?>', '<?= $valor_total_format ?>', '<?= $problema ?>', '<?= $servico ?>', '<?= $entrega[0] ?>', '<?= $entrada[0] ?>', '<?= $obs ?>')" title="Mais Informações"><i class="fa-solid fa-ellipsis"></i></a>
                         <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Atualizar Status">
                                 <i class="fa-solid fa-signal"></i>
@@ -114,6 +114,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                 <li style="padding: 2px 5px;" onclick="enviar_status(<?= $id_equipamento ?>, 'Cancelado')" ><a style="border-left: 4px solid #EF4444;" class="dropdown-item" href="#">Cancelado</a></li>
                             </ul>
                         </div>
+                        <a href="#" onclick="upload(<?= $id_equipamento ?>)"><i class="fa-regular fa-images"></i></a>
                     </td>
                 </tr>
             <?php
