@@ -54,3 +54,11 @@ td a {
 #moreView p span {
     font-size: 18px;
 }
+
+.zoom:hover {
+    cursor: pointer;
+}
+
+.zoom {
+    transition: .3s;
+}

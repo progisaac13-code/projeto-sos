@@ -235,9 +235,17 @@ date_default_timezone_set('America/Sao_Paulo')
                     <input type="hidden" id="ideq_upload">
                 </div>
             </div>
-            <div class="modal-footer">
-                <input type="hidden" id="id_equipamentoimg" val="">
-                <button type="button" class="btn btn-primary">Salvar Imagens</button>
+            <input type="hidden" id="id_equipamentoimg" value="">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalZoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+                <img src="" alt="" id="imgModal" class="img-fluid" width="100%" height="100%" style="max-height: 80vh; object-fit: contain;">
             </div>
         </div>
     </div>
@@ -523,7 +531,9 @@ date_default_timezone_set('America/Sao_Paulo')
 
     }
 
-    
+    function abrirZoom(img) {
+        $('#imgModal').attr('src', img);
+    } 
 
     lista()
 </script>
